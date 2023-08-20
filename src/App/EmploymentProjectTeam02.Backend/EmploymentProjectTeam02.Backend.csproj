@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Infrustructure\EmploymentProjectTeam02.IoC.Configuration\EmploymentProjectTeam02.IoC.Configuration.csproj" />
   </ItemGroup>
 
