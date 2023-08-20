@@ -12,7 +12,7 @@ using Taskmanagement.Shared.CommonRepository;
 
 namespace EmploymentProjectTeam02.Repositories.Base
 {
-    public class DepartmentRepository:RepositoryBase<Department, VmDepartment, int>,IDepartmentRepositpri
+    public class DepartmentRepository:RepositoryBase<Department, VmDepartment, int>,IDepartmentRepositpry
     {
         public DepartmentRepository(IMapper mapper,EmploymentDbContext dbContext) : base(mapper,dbContext) { }
     }
