@@ -16,4 +16,9 @@
     <ProjectReference Include="..\EmploymentProjectTeam02.Services.Model\EmploymentProjectTeam02.Services.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Department\Command\" />
+    <Folder Include="Department\Query\" />
+  </ItemGroup>
+
 </Project>

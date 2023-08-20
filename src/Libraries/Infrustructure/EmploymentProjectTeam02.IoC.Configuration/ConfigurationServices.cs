@@ -3,6 +3,7 @@ using EmploymentProjectTeam02.Infrustructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
 
 namespace EmploymentProjectTeam02.IoC.Configuration
 {
@@ -13,6 +14,7 @@ namespace EmploymentProjectTeam02.IoC.Configuration
             services.AddDbContext<EmploymentDbContext>(options
            => options.UseSqlServer(configuration.GetConnectionString("MyDbConn")));
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
+            
             return services;
         }
     }
