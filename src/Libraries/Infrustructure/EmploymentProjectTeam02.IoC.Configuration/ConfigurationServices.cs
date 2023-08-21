@@ -18,6 +18,7 @@ namespace EmploymentProjectTeam02.IoC.Configuration
             services.AddTransient<ICountryRepository,CountryRepository>();
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
             services.AddTransient<IDepartmentRepositpry,DepartmentRepository>();
+            
             services.AddMediatR(options =>
              options.RegisterServicesFromAssemblies(typeof(ICore).Assembly));
             return services;
