@@ -26,4 +26,8 @@ public class VmEmployee:IVm
     public VmCity? VmCity { get; set; } 
 
     public int Id { get ; set; }
+    public VmCountry? VmCountry { get; set; }
+    public VmState? VmState { get; set; }
+    public VmCity? VmCity { get; set; }
+
 }
