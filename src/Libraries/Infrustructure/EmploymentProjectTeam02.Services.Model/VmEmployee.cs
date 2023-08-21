@@ -1,5 +1,4 @@
-﻿using EmploymentProjectTeam02.Model;
-using EmploymentProjectTeam02.Shared.Common;
+﻿using EmploymentProjectTeam02.Shared.Common;
 
 namespace EmploymentProjectTeam02.Services.Model;
 
@@ -22,4 +21,8 @@ public class VmEmployee:IVm
     
     public int CityId { get; set; }
     public int Id { get ; set; }
+    public VmCountry? VmCountry { get; set; }
+    public VmState? VmState { get; set; }
+    public VmCity? VmCity { get; set; }
+
 }
