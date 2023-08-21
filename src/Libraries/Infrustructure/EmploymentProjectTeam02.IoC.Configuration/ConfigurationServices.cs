@@ -17,8 +17,9 @@ namespace EmploymentProjectTeam02.IoC.Configuration
             services.AddDbContext<EmploymentDbContext>(options=> options.UseSqlServer(configuration.GetConnectionString("MyDbConn")));
             services.AddTransient<ICountryRepository,CountryRepository>();
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
-            services.AddMediatR(options => options.RegisterServicesFromAssemblies(typeof(ICore).Assembly));
-            
+            services.AddTransient<IDepartmentRepositpry,DepartmentRepository>();
+            services.AddMediatR(options =>
+             options.RegisterServicesFromAssemblies(typeof(ICore).Assembly));
             return services;
         }
     }
