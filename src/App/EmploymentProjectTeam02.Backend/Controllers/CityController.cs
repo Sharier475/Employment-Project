@@ -2,11 +2,11 @@
 using EmploymentProjectTeam02.Core.City.Query;
 using EmploymentProjectTeam02.Services.Model;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmploymentProjectTeam02.Backend.Controllers;
-[Route("api/[controlller]")]
+
+[Route("api/[controller]")]
 [ApiController]
 public class CityController : ControllerBase
 {
@@ -47,5 +47,4 @@ public class CityController : ControllerBase
         var data = await _mediator.Send(new DeleteCity(id));
         return Ok(data);
     }
-
 }
