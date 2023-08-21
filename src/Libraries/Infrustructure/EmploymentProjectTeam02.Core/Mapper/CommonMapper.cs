@@ -3,17 +3,16 @@ using EmploymentProjectTeam02.Services.Model;
 using System;
 
 
+
+
 namespace EmploymentProjectTeam02.Core.Mapper;
 
-namespace EmploymentProjectTeam02.Core.Mapper
+public class CommonMapper : Profile
 {
-    public class CommonMapper : Profile
+    public CommonMapper()
     {
-        public CommonMapper()
-        {
-            CreateMap<VmDepartment, Model.Department>().ReverseMap();
-            CreateMap<VmState, Model.State>().ReverseMap();
-            
-        }
+        CreateMap<VmDepartment, Model.Department>().ReverseMap();
+        CreateMap<VmState, Model.State>().ReverseMap();
+        
     }
 }

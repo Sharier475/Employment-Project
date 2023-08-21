@@ -18,6 +18,8 @@ namespace EmploymentProjectTeam02.IoC.Configuration
            => options.UseSqlServer(configuration.GetConnectionString("MyDbConn")));
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
             services.AddTransient<IStateRepository, StateRepository>();
+            
+            
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
             services.AddMediatR(options => options.RegisterServicesFromAssemblies(typeof(ICore).Assembly));
 
