@@ -8,9 +8,9 @@ namespace EmploymentProjectTeam02.Infrustructure.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<City> builder)
         {
-            builder.ToTable("Cities");
+            builder.ToTable("City");
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.State).WithMany(x => x.Cities).HasForeignKey(x => x.StateId);
+            builder.HasOne(x => x.State).WithMany(x => x.cities).HasForeignKey(x => x.StateId).IsRequired(true);
         }
     }
 }

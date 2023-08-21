@@ -8,7 +8,8 @@ public class VmEmployee:IVm
     public string? Address { get; set; }
     public string? Gender { get; set; }
     public int DepartmentId { get; set; }
-   
+    public VmDepartment? Department { get; set; }
+
     public DateTime Joiningdate { get; set; }
     public Boolean SSc { get; set; }
     public Boolean HSc { get; set; }
@@ -23,11 +24,6 @@ public class VmEmployee:IVm
     public VmState? VmState { get; set; }
     
     public int CityId { get; set; }
-    public VmCity? VmCity { get; set; } 
-
-    public int Id { get ; set; }
-    public VmCountry? VmCountry { get; set; }
-    public VmState? VmState { get; set; }
     public VmCity? VmCity { get; set; }
-
+    public int Id { get ; set ; }
 }
