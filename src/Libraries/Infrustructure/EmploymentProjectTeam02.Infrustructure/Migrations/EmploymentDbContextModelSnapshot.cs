@@ -56,7 +56,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("City", (string)null);
                 });
 
             modelBuilder.Entity("EmploymentProjectTeam02.Model.Country", b =>
@@ -239,7 +239,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
             modelBuilder.Entity("EmploymentProjectTeam02.Model.City", b =>
                 {
                     b.HasOne("EmploymentProjectTeam02.Model.State", "State")
-                        .WithMany("Cities")
+                        .WithMany("cities")
                         .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -312,9 +312,9 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
 
             modelBuilder.Entity("EmploymentProjectTeam02.Model.State", b =>
                 {
-                    b.Navigation("Cities");
-
                     b.Navigation("Employees");
+
+                    b.Navigation("cities");
                 });
 #pragma warning restore 612, 618
         }

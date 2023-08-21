@@ -3,11 +3,9 @@ using EmploymentProjectTeam02.Infrustructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AutoMapper;
-using Taskmanagement.Core;
 using EmploymentProjectTeam02.Repositories.Interface;
 using EmploymentProjectTeam02.Repositories.Base;
-using MediatR;
+using EmploymentProjectTeam02.Core;
 
 namespace EmploymentProjectTeam02.IoC.Configuration
 {
@@ -22,6 +20,9 @@ namespace EmploymentProjectTeam02.IoC.Configuration
             services.AddTransient<IDepartmentRepositpry, DepartmentRepository>();
             services.AddTransient<ICountryRepository, CountryRepository>();
             services.AddTransient<IStateRepository, StateRepository>();
+            services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblies(typeof(ICore).Assembly);

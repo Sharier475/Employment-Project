@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\EmploymentProjectTeam02.Repositories\EmploymentProjectTeam02.Repositories.csproj" />
     <ProjectReference Include="..\EmploymentProjectTeam02.Core\EmploymentProjectTeam02.Core.csproj" />
     <ProjectReference Include="..\EmploymentProjectTeam02.Infrustructure\EmploymentProjectTeam02.Infrustructure.csproj" />
   </ItemGroup>

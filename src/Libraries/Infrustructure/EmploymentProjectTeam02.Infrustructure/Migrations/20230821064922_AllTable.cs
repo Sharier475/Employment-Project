@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EmploymentProjectTeam02.Infrustructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateAllTable : Migration
+    public partial class AllTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,7 +73,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cities",
+                name: "City",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -88,9 +88,9 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.PrimaryKey("PK_City", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cities_States_StateId",
+                        name: "FK_City_States_StateId",
                         column: x => x.StateId,
                         principalTable: "States",
                         principalColumn: "Id",
@@ -126,9 +126,9 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employees_Cities_CityId",
+                        name: "FK_Employees_City_CityId",
                         column: x => x.CityId,
-                        principalTable: "Cities",
+                        principalTable: "City",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -152,8 +152,8 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_StateId",
-                table: "Cities",
+                name: "IX_City_StateId",
+                table: "City",
                 column: "StateId");
 
             migrationBuilder.CreateIndex(
@@ -189,7 +189,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "City");
 
             migrationBuilder.DropTable(
                 name: "Departments");
