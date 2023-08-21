@@ -23,11 +23,6 @@ public class VmEmployee:IVm
     public VmState? VmState { get; set; }
     
     public int CityId { get; set; }
-    public VmCity? VmCity { get; set; } 
-
-    public int Id { get ; set; }
-    public VmCountry? VmCountry { get; set; }
-    public VmState? VmState { get; set; }
     public VmCity? VmCity { get; set; }
-
+    public int Id { get ; set ; }
 }

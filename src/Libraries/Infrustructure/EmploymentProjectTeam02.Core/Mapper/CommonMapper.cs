@@ -13,6 +13,7 @@ public class CommonMapper : Profile
     {
         CreateMap<VmDepartment, Model.Department>().ReverseMap();
         CreateMap<VmState, Model.State>().ReverseMap();
+        CreateMap<VmCountry, Model.Country>().ReverseMap();
         
     }
 }

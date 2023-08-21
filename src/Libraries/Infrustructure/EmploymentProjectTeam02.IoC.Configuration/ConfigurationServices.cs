@@ -7,6 +7,7 @@ using AutoMapper;
 using Taskmanagement.Core;
 using EmploymentProjectTeam02.Repositories.Interface;
 using EmploymentProjectTeam02.Repositories.Base;
+using MediatR;
 
 namespace EmploymentProjectTeam02.IoC.Configuration
 {
@@ -15,8 +16,17 @@ namespace EmploymentProjectTeam02.IoC.Configuration
         public static IServiceCollection AddExtention(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<EmploymentDbContext>(options=> options.UseSqlServer(configuration.GetConnectionString("MyDbConn")));
-            services.AddTransient<ICountryRepository,CountryRepository>();
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
+
+            //Repository add...
+            services.AddTransient<IDepartmentRepositpry, DepartmentRepository>();
+            services.AddTransient<ICountryRepository, CountryRepository>();
+            services.AddTransient<IStateRepository, StateRepository>();
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(typeof(ICore).Assembly);
+                
+            });
 
             return services;
         }

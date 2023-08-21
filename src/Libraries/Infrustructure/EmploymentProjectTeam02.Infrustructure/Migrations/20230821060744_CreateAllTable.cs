@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EmploymentProjectTeam02.Infrustructure.Migrations
 {
     /// <inheritdoc />
-    public partial class WorkedOnState : Migration
+    public partial class CreateAllTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
