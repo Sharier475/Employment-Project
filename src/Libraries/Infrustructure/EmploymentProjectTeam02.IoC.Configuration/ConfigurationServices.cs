@@ -3,6 +3,9 @@ using EmploymentProjectTeam02.Infrustructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using EmploymentProjectTeam02.Repositories.Interface;
+using EmploymentProjectTeam02.Repositories.Base;
+using Taskmanagement.Core;
 
 namespace EmploymentProjectTeam02.IoC.Configuration
 {
@@ -13,6 +16,9 @@ namespace EmploymentProjectTeam02.IoC.Configuration
             services.AddDbContext<EmploymentDbContext>(options
            => options.UseSqlServer(configuration.GetConnectionString("MyDbConn")));
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
+            services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddMediatR(options => options.RegisterServicesFromAssembly(typeof(ICore).Assembly));
             return services;
         }
     }

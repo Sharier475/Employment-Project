@@ -1,15 +1,20 @@
 ﻿using AutoMapper;
 using EmploymentProjectTeam02.Model;
 using EmploymentProjectTeam02.Services.Model;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace EmploymentProjectTeam02.Core.Mapper;
-
-public class CommonMapper : Profile
+namespace EmploymentProjectTeam02.Core.Mapper
 {
-    public CommonMapper()
+    public class CommonMapper : Profile
     {
-        CreateMap<VmCity, Model.City>().ReverseMap();
-        CreateMap<VmEmployee, Employee>().ReverseMap();
+        public CommonMapper()
+        {
+            CreateMap<VmDepartment, Model.Department>().ReverseMap();
+           
+        }
     }
 }
