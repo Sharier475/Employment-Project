@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -16,11 +16,6 @@
     <ProjectReference Include="..\..\Domain\EmploymentProjectTeam02.Repositories\EmploymentProjectTeam02.Repositories.csproj" />
     <ProjectReference Include="..\EmploymentProjectTeam02.Infrustructure\EmploymentProjectTeam02.Infrustructure.csproj" />
     <ProjectReference Include="..\EmploymentProjectTeam02.Services.Model\EmploymentProjectTeam02.Services.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Department\Command\" />
-    <Folder Include="Department\Query\" />
   </ItemGroup>
 
 </Project>

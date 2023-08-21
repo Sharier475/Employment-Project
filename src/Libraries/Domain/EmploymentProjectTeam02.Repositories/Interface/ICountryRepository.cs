@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Taskmanagement.Shared.CommonRepository;
 
-namespace EmploymentProjectTeam02.Repositories.Interface
+namespace EmploymentProjectTeam02.Repositories.Interface;
+
+public interface ICountryRepository:IRepository<Country,VmCountry,int>
 {
-    public interface IDepartmentRepositpri:IRepository<Department, VmDepartment, int>
-    {
-    }
+
 }
