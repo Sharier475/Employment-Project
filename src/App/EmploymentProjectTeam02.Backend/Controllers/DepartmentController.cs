@@ -16,23 +16,18 @@ namespace EmploymentProjectTeam02.Backend.Controllers
         {
             _mediator = mediator;
         }
-
-
         [HttpGet]
         public async Task<ActionResult<VmDepartment>> Get()
         {
             var data = await _mediator.Send(new GetAllDepartmentQuery());
             return Ok(data);
         }
-
-        [HttpGet("Id")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<VmDepartment>>GetbyId(int id)
         {
             var data= await _mediator.Send(new GetDepartmentById(id));
             return Ok(data);
-
         }
-
         [HttpPost]
         public async Task<ActionResult<VmDepartment>> PostAsync([FromBody] VmDepartment vmdepartment)
         {
@@ -40,7 +35,13 @@ namespace EmploymentProjectTeam02.Backend.Controllers
             return Ok(data);
         }
 
-        [HttpDelete("id")]
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<VmDepartment>> UpdateAsync(int id,VmDepartment department)
+        {
+            var data = await _mediator.Send(new UpdateDepartment(id,department));
+            return Ok(data);
+        }
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<VmDepartment>> DeleteAsync(int id)
         {
             var data = await _mediator.Send(new DeleteDepartment(id));
