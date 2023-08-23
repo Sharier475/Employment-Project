@@ -22,7 +22,7 @@ namespace EmploymentProjectTeam02.Backend.Controllers
             var data = await _mediator.Send(new GetAllStateQuery());
             return Ok(data);
         }
-        [HttpGet("id")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<VmState>> Get(int id)
         {
             var data = await _mediator.Send(new GetStateById(id));
@@ -36,13 +36,13 @@ namespace EmploymentProjectTeam02.Backend.Controllers
 
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<VmState>> PutAsync(int id, [FromBody] VmState vmState)
         {
             var data = await _mediator.Send(new UpdateState(id, vmState));
             return Ok(data);
         }
-        [HttpDelete("id")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<VmState>> DeleteAsync(int id)
         {
             var data = await _mediator.Send(new DeleteState(id));

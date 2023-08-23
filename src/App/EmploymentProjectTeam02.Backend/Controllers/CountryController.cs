@@ -24,7 +24,7 @@ namespace EmploymentProjectTeam02.Backend.Controllers
             var data = await _mediator.Send(new GetAllCountry());
             return Ok(data);
         }
-        [HttpGet("id")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<VmCountry>> GetById(int id)
         {
             var data = await _mediator.Send(new GetCountryById(id));
@@ -38,14 +38,14 @@ namespace EmploymentProjectTeam02.Backend.Controllers
             return Ok(data);
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id:int}")]
 
         public async Task<ActionResult<VmCountry>> Update(int id, [FromBody] VmCountry vmCountry)
         {
             var data = await _mediator.Send(new UpdateCountry(id, vmCountry)); 
             return Ok(data);
         }
-        [HttpDelete("id")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<VmCountry>> Delete(int id)
         {
             var data = await _mediator.Send(new DeleteCountry(id));

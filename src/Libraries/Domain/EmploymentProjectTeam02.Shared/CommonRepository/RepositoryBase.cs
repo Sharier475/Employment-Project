@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Taskmanagement.Shared.Extentions;
@@ -62,6 +63,14 @@ namespace Taskmanagement.Shared.CommonRepository
             var models = _mapper.Map<IEnumerable<IModel>>(data);
             return Task.FromResult(models);
 
+        }
+
+        public async Task<List<IModel>> GetList(params Expression<Func<TEntity, object>>[] includes)
+        {
+            var entities = await includes.Aggregate(
+             _dbContext.Set<TEntity>().AsQueryable(), (current, include) => current.Include(include))
+             .ToListAsync().ConfigureAwait(true);
+            return _mapper.Map<List<IModel>>(entities);
         }
     }
 }

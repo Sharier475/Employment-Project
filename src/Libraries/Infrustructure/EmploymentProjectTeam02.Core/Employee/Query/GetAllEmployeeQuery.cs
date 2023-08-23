@@ -2,6 +2,8 @@
 using EmploymentProjectTeam02.Repositories.Interface;
 using EmploymentProjectTeam02.Services.Model;
 using MediatR;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EmploymentProjectTeam02.Core.Employee.Query;
 
@@ -15,7 +17,7 @@ public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, I
     }
     public async Task<IEnumerable<VmEmployee>> Handle(GetAllEmployeeQuery request, CancellationToken cancellationToken)
     {
-        var result = await _EmployeeRepository.GetList();
+        var result = await _EmployeeRepository.GetList(x=>x.Country,x=>x.State,x=>x.City,x=>x.Department);
         return result;
     }
 }
