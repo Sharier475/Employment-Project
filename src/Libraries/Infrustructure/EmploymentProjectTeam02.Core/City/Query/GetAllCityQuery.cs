@@ -15,7 +15,7 @@ public class GetAllCityQueryHandler : IRequestHandler<GetAllCityQuery, IEnumerab
     }
     public async Task<IEnumerable<VmCity>> Handle(GetAllCityQuery request, CancellationToken cancellationToken)
     {
-        var result = await _CityRepository.GetList();
+        var result = await _CityRepository.GetList(x=>x.State);
         return result;
     }
 }

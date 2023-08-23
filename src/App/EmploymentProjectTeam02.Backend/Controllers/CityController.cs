@@ -21,7 +21,7 @@ public class CityController : ControllerBase
         var data = await _mediator.Send(new GetAllCityQuery());
         return Ok(data);
     }
-    [HttpGet("id")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<VmCity>> Get(int id)
     {
         var data = await _mediator.Send(new GetCityById(id));
@@ -35,13 +35,13 @@ public class CityController : ControllerBase
 
     }
 
-    [HttpPut("id")]
+    [HttpPut("{id:int}")]
     public async Task<ActionResult<VmCity>> PutAsync(int id, [FromBody] VmCity vmCity)
     {
         var data = await _mediator.Send(new UpdateCity(id, vmCity));
         return Ok(data);
     }
-    [HttpDelete("id")]
+    [HttpDelete("{id:int}")]
     public async Task<ActionResult<VmCity>> DeleteAsync(int id)
     {
         var data = await _mediator.Send(new DeleteCity(id));

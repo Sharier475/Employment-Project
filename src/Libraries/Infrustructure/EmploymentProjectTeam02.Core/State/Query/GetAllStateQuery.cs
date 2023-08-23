@@ -11,9 +11,14 @@ public class GetAllProductQueryHandler : IRequestHandler<GetAllStateQuery, IEnum
 {
     private readonly IStateRepository _stateRepository;
 
+    public GetAllProductQueryHandler(IStateRepository stateRepository)
+    {
+        _stateRepository = stateRepository;
+    }
+
     public async Task<IEnumerable<VmState>> Handle(GetAllStateQuery request, CancellationToken cancellationToken)
     {
-        var result = await _stateRepository.GetList();
+        var result = await _stateRepository.GetList(x=>x.Country);
         return result;
 
     }
