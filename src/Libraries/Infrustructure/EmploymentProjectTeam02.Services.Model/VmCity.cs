@@ -10,9 +10,9 @@ namespace EmploymentProjectTeam02.Services.Model
      
        
         public int Id { get ; set; }
-        [JsonIgnore]
+       
         public VmState? State { get; set; }
-        [JsonIgnore]
+       
         public ICollection<VmEmployee> VmEmployees { get; set; } = new HashSet<VmEmployee>();
     }
 }
