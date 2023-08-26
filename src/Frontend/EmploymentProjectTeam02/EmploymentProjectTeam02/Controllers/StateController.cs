@@ -38,12 +38,12 @@ public class StateController : Controller
     {
         if (id == 0)
         {
-            var response = await _httpClient.GetAsync("State");
+            var response = await _httpClient.GetAsync("Country");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["stateId"] = new SelectList(stateList,"id","statename");
+                ViewData["stateId"] = new SelectList(stateList,"id", "countryName");
             }
             return View( new State());
         }
