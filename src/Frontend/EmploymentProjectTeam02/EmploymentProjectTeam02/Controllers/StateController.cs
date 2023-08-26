@@ -31,17 +31,19 @@ public class StateController : Controller
         return View(data);
     }
 
+    
+
     [HttpGet]
     public async Task<IActionResult> AddorEdit(int id)
     {
         if (id == 0)
         {
-            var response = await _httpClient.GetAsync("Country");
+            var response = await _httpClient.GetAsync("State");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList,"id","countryName");
+                ViewData["stateId"] = new SelectList(stateList,"id","statename");
             }
             return View( new State());
         }
