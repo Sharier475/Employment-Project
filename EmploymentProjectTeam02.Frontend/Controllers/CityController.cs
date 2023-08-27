@@ -15,21 +15,21 @@ public class CityController : Controller
         _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
     }
 
-    private async Task<List<City>> GetCityAll()
+    private async Task<List<City>> GetAllCity()
     {
         var response = await _httpClient.GetAsync("City");
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
-            var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-            return citylist;
+            var cityList = JsonConvert.DeserializeObject<List<City>>(content);
+            return cityList;
         }
         return new List<City>();
     }
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var listCiy = await GetCityAll();
+        var listCiy = await GetAllCity();
         return View(listCiy);
     }
 

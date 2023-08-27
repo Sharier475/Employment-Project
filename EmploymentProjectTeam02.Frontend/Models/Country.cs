@@ -4,9 +4,9 @@ namespace EmploymentProjectTeam02.Frontend.Models;
 
 public class Country
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     [DisplayName("Country Name")]
-    public String? countryName { get; set; }
-    public ICollection<State> states { get; set; } = new HashSet<State>();
-    public ICollection<Employee> employees { get; set; } = new HashSet<Employee>();
+    public String? CountryName { get; set; }
+    public ICollection<State> States { get; set; } = new HashSet<State>();
+    public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
 }

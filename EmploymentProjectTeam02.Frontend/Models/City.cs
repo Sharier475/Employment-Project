@@ -2,9 +2,9 @@
 
 public class City
 {
-    public int id { get; set; }
-    public string? cityName { get; set; }
-    public int stateId { get; set; }
-    public State? state { get; set; }
-    public ICollection<Employee> employees { get; set; } = new HashSet<Employee>();
+    public int Id { get; set; }
+    public string? CityName { get; set; }
+    public int StateId { get; set; }
+    public State? State { get; set; }
+    public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
 }

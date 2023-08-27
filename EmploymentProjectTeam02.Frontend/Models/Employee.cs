@@ -1,23 +1,23 @@
 ﻿namespace EmploymentProjectTeam02.Frontend.Models;
 public class Employee
 {
-    public int id { get; set; }
-    public string? name { get; set; }
-    public string? address { get; set; }
-    public string? gender { get; set; }
-    public int departmentId { get; set; }
-    public Department? department { get; set; }
-    public DateTime joiningdate { get; set; }
-    public Boolean ssc { get; set; }
-    public Boolean hsc { get; set; }
-    public Boolean bsc { get; set; }
-    public Boolean msc { get; set; }
-    public string? picture { get; set; }
-    public int countryId { get; set; }
-    public Country? country { get; set; }
-    public int stateId { get; set; }
-    public State? state { get; set; }
-    public int cityId { get; set; }
-    public City? city { get; set; }
+    public int Id { get; set; }
+    public string? Name { get; set; }
+    public string? Address { get; set; }
+    public string? Gender { get; set; }
+    public int DepartmentId { get; set; }
+    public Department? Department { get; set; }
+    public DateTime Joiningdate { get; set; }
+    public Boolean SSC { get; set; }
+    public Boolean HSC { get; set; }
+    public Boolean BSC { get; set; }
+    public Boolean MSC { get; set; }
+    public string? Picture { get; set; }
+    public int CountryId { get; set; }
+    public Country? Country { get; set; }
+    public int StateId { get; set; }
+    public State? State { get; set; }
+    public int CityId { get; set; }
+    public City? City { get; set; }
 }
 
