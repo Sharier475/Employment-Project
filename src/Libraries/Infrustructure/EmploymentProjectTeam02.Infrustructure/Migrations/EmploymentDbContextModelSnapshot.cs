@@ -241,7 +241,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                     b.HasOne("EmploymentProjectTeam02.Model.State", "State")
                         .WithMany("cities")
                         .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("State");
@@ -252,25 +252,25 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                     b.HasOne("EmploymentProjectTeam02.Model.City", "City")
                         .WithMany("Employees")
                         .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EmploymentProjectTeam02.Model.Country", "Country")
                         .WithMany("Employees")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EmploymentProjectTeam02.Model.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EmploymentProjectTeam02.Model.State", "State")
                         .WithMany("Employees")
                         .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -287,7 +287,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                     b.HasOne("EmploymentProjectTeam02.Model.Country", "Country")
                         .WithMany("states")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Country");

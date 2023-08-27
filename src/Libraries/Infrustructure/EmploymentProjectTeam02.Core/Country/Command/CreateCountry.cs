@@ -8,7 +8,6 @@ namespace EmploymentProjectTeam02.Core.Country.Command;
 public record CreateCountry(VmCountry VmCountry):IRequest<VmCountry>;
 public class CreateCountryHandler : IRequestHandler<CreateCountry, VmCountry>
 {
-
     private readonly ICountryRepository _countryRepository;
     private readonly IMapper _mapper;
     public CreateCountryHandler(ICountryRepository countryRepository,IMapper mapper)

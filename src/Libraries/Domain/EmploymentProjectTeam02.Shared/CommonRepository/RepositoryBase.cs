@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using EmploymentProjectTeam02.Shared.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Taskmanagement.Shared.Extentions;
 
 namespace Taskmanagement.Shared.CommonRepository

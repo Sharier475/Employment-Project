@@ -3,8 +3,6 @@ using EmploymentProjectTeam02.Services.Model;
 using MediatR;
 
 namespace EmploymentProjectTeam02.Core.Country.Query;
-
-
 public record GetAllCountry():IRequest<IEnumerable<VmCountry>>;
 public class GetAllCountryHandler : IRequestHandler<GetAllCountry, IEnumerable<VmCountry>>
 {

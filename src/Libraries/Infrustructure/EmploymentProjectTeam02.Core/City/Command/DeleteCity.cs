@@ -4,7 +4,6 @@ using EmploymentProjectTeam02.Services.Model;
 using MediatR;
 
 namespace EmploymentProjectTeam02.Core.City.Command;
-
 public record DeleteCity(int Id) : IRequest<VmCity>;
 public class DeleteCityHandler : IRequestHandler<DeleteCity, VmCity>
 {

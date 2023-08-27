@@ -4,7 +4,6 @@ using EmploymentProjectTeam02.Services.Model;
 using MediatR;
 
 namespace EmploymentProjectTeam02.Core.City.Query;
-
 public record GetCityById(int Id) : IRequest<VmCity>;
 
     public class GetCityByIdHandler : IRequestHandler<GetCityById, VmCity>

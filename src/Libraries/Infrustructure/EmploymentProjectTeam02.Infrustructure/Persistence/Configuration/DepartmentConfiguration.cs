@@ -2,15 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EmploymentProjectTeam02.Infrustructure.Persistence.Configuration
+namespace EmploymentProjectTeam02.Infrustructure.Persistence.Configuration;
+
+public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 {
-    public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
+    public void Configure(EntityTypeBuilder<Department> builder)
     {
-        public void Configure(EntityTypeBuilder<Department> builder)
-        {
-            builder.ToTable("Departments");
-            builder.HasKey(x => x.Id);
-            
-        }
+        builder.ToTable("Departments");
+        builder.HasKey(x => x.Id);
+        
     }
 }

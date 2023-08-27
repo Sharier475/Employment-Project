@@ -13,6 +13,4 @@ public class StateRepository : RepositoryBase<State, VmState, int>, IStateReposi
     public StateRepository(IMapper mapper, EmploymentDbContext dbContext) : base(mapper, dbContext)
     {
     }
-
-   
 }

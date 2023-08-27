@@ -10,7 +10,4 @@ public class VmState : IVm
     public int CountryId { get; set; }
     [JsonIgnore]
     public VmCountry? Country { get; set; }
-        
-
-
 }

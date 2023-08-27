@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using EmploymentProjectTeam02.Repositories.Base;
 using EmploymentProjectTeam02.Repositories.Interface;
 using EmploymentProjectTeam02.Services.Model;
 using MediatR;

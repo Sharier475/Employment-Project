@@ -11,25 +11,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{8F3BEEBA-C7A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{42081F5B-6733-435E-BF73-DA264902C3B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Backend", "src\App\EmploymentProjectTeam02.Backend\EmploymentProjectTeam02.Backend.csproj", "{539F4B62-4E34-4783-9F87-CBBB4D0E6517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Backend", "src\App\EmploymentProjectTeam02.Backend\EmploymentProjectTeam02.Backend.csproj", "{539F4B62-4E34-4783-9F87-CBBB4D0E6517}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2DE4F407-9EB8-4CE9-8907-3AC601E1E892}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrustructure", "Infrustructure", "{9BFA4E39-981B-4FFA-932F-976E24C1EA6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Shared", "src\Libraries\Domain\EmploymentProjectTeam02.Shared\EmploymentProjectTeam02.Shared.csproj", "{EF02C47E-F199-479F-A803-1963F474666F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Shared", "src\Libraries\Domain\EmploymentProjectTeam02.Shared\EmploymentProjectTeam02.Shared.csproj", "{EF02C47E-F199-479F-A803-1963F474666F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Repositories", "src\Libraries\Domain\EmploymentProjectTeam02.Repositories\EmploymentProjectTeam02.Repositories.csproj", "{E79F8902-F230-45B7-92A4-8ED0FA0025D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Repositories", "src\Libraries\Domain\EmploymentProjectTeam02.Repositories\EmploymentProjectTeam02.Repositories.csproj", "{E79F8902-F230-45B7-92A4-8ED0FA0025D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Core", "src\Libraries\Infrustructure\EmploymentProjectTeam02.Core\EmploymentProjectTeam02.Core.csproj", "{EDCD0740-EE45-402B-8869-4AC3753C132D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Core", "src\Libraries\Infrustructure\EmploymentProjectTeam02.Core\EmploymentProjectTeam02.Core.csproj", "{EDCD0740-EE45-402B-8869-4AC3753C132D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Model", "src\Libraries\Domain\EmploymentProjectTeam02.Model\EmploymentProjectTeam02.Model.csproj", "{706902C9-6D20-480F-8736-C6971D4540E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Model", "src\Libraries\Domain\EmploymentProjectTeam02.Model\EmploymentProjectTeam02.Model.csproj", "{706902C9-6D20-480F-8736-C6971D4540E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Infrustructure", "src\Libraries\Infrustructure\EmploymentProjectTeam02.Infrustructure\EmploymentProjectTeam02.Infrustructure.csproj", "{FA8FE523-FB15-43D3-8C4C-0E3D7369FE12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Infrustructure", "src\Libraries\Infrustructure\EmploymentProjectTeam02.Infrustructure\EmploymentProjectTeam02.Infrustructure.csproj", "{FA8FE523-FB15-43D3-8C4C-0E3D7369FE12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.IoC.Configuration", "src\Libraries\Infrustructure\EmploymentProjectTeam02.IoC.Configuration\EmploymentProjectTeam02.IoC.Configuration.csproj", "{57D98D6A-3006-44B2-86B6-689664962854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.IoC.Configuration", "src\Libraries\Infrustructure\EmploymentProjectTeam02.IoC.Configuration\EmploymentProjectTeam02.IoC.Configuration.csproj", "{57D98D6A-3006-44B2-86B6-689664962854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Services.Model", "src\Libraries\Infrustructure\EmploymentProjectTeam02.Services.Model\EmploymentProjectTeam02.Services.Model.csproj", "{5E6B04D0-7A62-4BD8-A176-15ED1856DB05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmploymentProjectTeam02.Services.Model", "src\Libraries\Infrustructure\EmploymentProjectTeam02.Services.Model\EmploymentProjectTeam02.Services.Model.csproj", "{5E6B04D0-7A62-4BD8-A176-15ED1856DB05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{C42D6B54-5C94-451B-AF80-6D692C546FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentProjectTeam02.Frontend", "EmploymentProjectTeam02.Frontend\EmploymentProjectTeam02.Frontend.csproj", "{C397B211-EE6B-4518-852A-B78C0EC816A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{5E6B04D0-7A62-4BD8-A176-15ED1856DB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E6B04D0-7A62-4BD8-A176-15ED1856DB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E6B04D0-7A62-4BD8-A176-15ED1856DB05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C397B211-EE6B-4518-852A-B78C0EC816A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C397B211-EE6B-4518-852A-B78C0EC816A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C397B211-EE6B-4518-852A-B78C0EC816A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C397B211-EE6B-4518-852A-B78C0EC816A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +94,8 @@ Global
 		{FA8FE523-FB15-43D3-8C4C-0E3D7369FE12} = {9BFA4E39-981B-4FFA-932F-976E24C1EA6D}
 		{57D98D6A-3006-44B2-86B6-689664962854} = {9BFA4E39-981B-4FFA-932F-976E24C1EA6D}
 		{5E6B04D0-7A62-4BD8-A176-15ED1856DB05} = {9BFA4E39-981B-4FFA-932F-976E24C1EA6D}
+		{C42D6B54-5C94-451B-AF80-6D692C546FCF} = {8F3BEEBA-C7AD-4ADB-ABA2-2F12CA55B859}
+		{C397B211-EE6B-4518-852A-B78C0EC816A7} = {C42D6B54-5C94-451B-AF80-6D692C546FCF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE2EB2AC-2330-4BF0-BC90-E61A304A7A45}

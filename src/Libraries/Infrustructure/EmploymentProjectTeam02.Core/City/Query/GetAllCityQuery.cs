@@ -4,7 +4,6 @@ using EmploymentProjectTeam02.Services.Model;
 using MediatR;
 
 namespace EmploymentProjectTeam02.Core.City.Query;
-
 public record GetAllCityQuery() : IRequest<IEnumerable<VmCity>>;
 public class GetAllCityQueryHandler : IRequestHandler<GetAllCityQuery, IEnumerable<VmCity>>
 {

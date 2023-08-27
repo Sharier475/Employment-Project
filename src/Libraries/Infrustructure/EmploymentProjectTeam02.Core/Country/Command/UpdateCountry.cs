@@ -4,8 +4,6 @@ using EmploymentProjectTeam02.Services.Model;
 using MediatR;
 
 namespace EmploymentProjectTeam02.Core.Country.Command;
-
-
 public record UpdateCountry(int Id,VmCountry VmCountry):IRequest<VmCountry>;
 public class UpdateCountryHandler : IRequestHandler<UpdateCountry, VmCountry>
 {

@@ -4,7 +4,6 @@ using EmploymentProjectTeam02.Services.Model;
 using MediatR;
 
 namespace EmploymentProjectTeam02.Core.City.Command;
-
 public record CreateCity(VmCity VmCity) : IRequest<VmCity>;
 public class CreateCityHandler : IRequestHandler<CreateCity, VmCity>
 {

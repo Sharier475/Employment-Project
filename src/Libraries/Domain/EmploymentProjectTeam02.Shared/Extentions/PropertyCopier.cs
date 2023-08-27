@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Taskmanagement.Shared.Extentions
+﻿namespace Taskmanagement.Shared.Extentions;
+public static class PropertyCopier
 {
-    public static class PropertyCopier
-    {
-        public static void Copy<TParent, TChild>(this TParent parent, TChild child)
-        where TParent : class
-        where TChild : class
+    public static void Copy<TParent, TChild>(this TParent parent, TChild child)
+    where TParent : class
+    where TChild : class
 
+    {
+        var parentProperties = parent.GetType().GetProperties();
+        var childProperties = child.GetType().GetProperties();
+        foreach (var parentProperty in parentProperties)
         {
-            var parentProperties = parent.GetType().GetProperties();
-            var childProperties = child.GetType().GetProperties();
-            foreach (var parentProperty in parentProperties)
+            foreach (var childProperty in childProperties)
             {
-                foreach (var childProperty in childProperties)
+                if (parentProperty.Name == childProperty.Name &&
+                parentProperty.PropertyType == childProperty.PropertyType)
                 {
-                    if (parentProperty.Name == childProperty.Name &&
-                    parentProperty.PropertyType == childProperty.PropertyType)
-                    {
-                        childProperty.SetValue(child, parentProperty.GetValue(parent));
-                        break;
-                    }
+                    childProperty.SetValue(child, parentProperty.GetValue(parent));
+                    break;
                 }
             }
         }
