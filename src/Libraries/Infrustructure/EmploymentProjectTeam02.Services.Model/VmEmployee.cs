@@ -1,9 +1,11 @@
 ﻿using EmploymentProjectTeam02.Shared.Common;
+using Newtonsoft.Json;
 
 namespace EmploymentProjectTeam02.Services.Model;
 
 public class VmEmployee:IVm
 {
+    [JsonProperty("employeeName", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
     public string? Name { get; set; }
     public string? Address { get; set; }
     public string? Gender { get; set; }

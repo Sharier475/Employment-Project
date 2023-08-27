@@ -7,10 +7,9 @@ namespace EmploymentProjectTeam02.Controllers;
 public class DepartmentController : Controller
 {
     private readonly HttpClient _httpClient;
-    public DepartmentController()
+    public DepartmentController(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
 
     public async Task<List<Department>> GetAllDepartment()
@@ -69,7 +68,7 @@ public class DepartmentController : Controller
         else
         {
             //update//
-            if (id != department.id)
+            if (id != department.Id)
             {
                 return BadRequest();
             }

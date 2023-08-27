@@ -8,10 +8,9 @@ namespace EmploymentProjectTeam02.Controllers;
 public class StateController : Controller
 {
     private readonly HttpClient _httpClient;
-    public StateController()
+    public StateController(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
 
     public async Task<List<State>> GetAllState()
@@ -92,7 +91,7 @@ public class StateController : Controller
             else
             {
                 //update Data
-                if (id != state.id)
+                if (id != state.Id)
                 {
                     return BadRequest();
                 }

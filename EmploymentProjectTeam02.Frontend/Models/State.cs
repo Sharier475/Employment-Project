@@ -1,10 +1,14 @@
-﻿namespace EmploymentProjectTeam02.Frontend.Models;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace EmploymentProjectTeam02.Frontend.Models;
 public class State
 {
     public int Id { get; set; }
+    [DisplayName("State Name"), Required, MaxLength(50)]
     public string? StateName { get; set; }
     public int CountryId { get; set; }
-    public Country? Country { get; set; }
-    public ICollection<City> Cities { get; set; } = new HashSet<City>();
-    public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
+    [DisplayName("Country Name"), Required, MaxLength(50)]
+    public Country? CountryName { get; set; }
+   
 }

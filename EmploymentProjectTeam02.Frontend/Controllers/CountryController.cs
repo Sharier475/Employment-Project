@@ -7,10 +7,9 @@ namespace EmploymentProjectTeam02.Controllers;
 public class CountryController : Controller
 {
     private readonly HttpClient _httpClient;
-    public CountryController()
+    public CountryController(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
     public async Task<List<Country>> GetAllCountry()
     {
@@ -67,7 +66,7 @@ public class CountryController : Controller
         else
         {
             //Update
-            if (id != country.id)
+            if (id != country.Id)
             {
                 return BadRequest();
 

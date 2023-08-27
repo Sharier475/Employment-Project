@@ -8,26 +8,25 @@ namespace EmploymentProjectTeam02.Controllers;
 public class EmployeeController : Controller
 {
     private readonly HttpClient _httpClient;
-    public EmployeeController()
+    public EmployeeController(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
-    private async Task<List<Employee>> GetAlllEmployee()
+    private async Task<List<Employee>> GetAllEmployee()
     {
         var response = await _httpClient.GetAsync("Employee");
 
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
-            var citylist = JsonConvert.DeserializeObject<List<Employee>>(content);
-            return citylist;
+            var cityList = JsonConvert.DeserializeObject<List<Employee>>(content);
+            return cityList;
         }
         return new List<Employee>();
     }
     public async Task<IActionResult> Index()
     {
-        var listEmp = await GetAlllEmployee();
+        var listEmp = await GetAllEmployee();
         return View(listEmp);
     }
 
@@ -145,7 +144,7 @@ public class EmployeeController : Controller
                     {
                         pictureFile.CopyTo(stream);
                     }
-                    employee.picture = $"{pictureFile.FileName}";
+                    employee.Picture = $"{pictureFile.FileName}";
                 }
                 var response = await _httpClient.PostAsJsonAsync("Employee", employee);
 
@@ -163,7 +162,7 @@ public class EmployeeController : Controller
             else
             {
 
-                if (id != employee.id)
+                if (id != employee.Id)
                 {
                     return BadRequest();
                 }
@@ -176,7 +175,7 @@ public class EmployeeController : Controller
                         {
                             pictureFile.CopyTo(stream);
                         }
-                        employee.picture = $"{pictureFile.FileName}";
+                        employee.Picture = $"{pictureFile.FileName}";
                     }
                     var response = await _httpClient.PutAsJsonAsync($"Employee/{id}", employee);
 
@@ -217,7 +216,7 @@ public class EmployeeController : Controller
         {
             var content = await response.Content.ReadAsStringAsync();
             var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-            List<State> filteredStates = stateList.Where(state => state.countryId == countryId).ToList();
+            List<State> filteredStates = stateList.Where(state => state.CountryId == countryId).ToList();
             return Json(filteredStates);
         }
         return NotFound();
@@ -231,7 +230,7 @@ public class EmployeeController : Controller
         {
             var content = await response.Content.ReadAsStringAsync();
             var CityList = JsonConvert.DeserializeObject<List<City>>(content);
-            List<City> filteredStates = CityList.Where(state => state.stateId == stateId).ToList();
+            List<City> filteredStates = CityList.Where(state => state.StateId == stateId).ToList();
             return Json(filteredStates);
         }
         return NotFound();
