@@ -5,14 +5,14 @@ namespace EmploymentProjectTeam02.Services.Model
 {
     public class VmCity : IVm
     {
-        public string? CityName { get; set; }
+        public string CityName { get; set; }
         public int StateId { get; set; }
      
        
         public int Id { get ; set; }
        
-        public VmState? State { get; set; }
+        public VmState State { get; set; }
        
-        public ICollection<VmEmployee> VmEmployees { get; set; } = new HashSet<VmEmployee>();
+        
     }
 }

@@ -1,9 +1,13 @@
-﻿namespace EmploymentProjectTeam02.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace EmploymentProjectTeam02.Models
 {
     public class Department
     {
-        public int id { get; set; }
-        public string? departmentName { get; set; }
-        public ICollection<Employee> employees { get; set; } = new HashSet<Employee>();
+        public int Id { get; set; }
+        [Required,MaxLength(50), DisplayName("Department Name")]
+        public  string DepartmentName { get; set; }
+      
     }
 }

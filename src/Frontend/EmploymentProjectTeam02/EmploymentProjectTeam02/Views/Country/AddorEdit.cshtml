@@ -12,11 +12,11 @@
     <div class="col-md-4">
         <form asp-action="AddorEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.Id)
             <div class="form-group">
-                <label asp-for="countryName" class="control-label"></label>
-                <input asp-for="countryName" class="form-control" />
-                <span asp-validation-for="countryName" class="text-danger"></span>
+                <label asp-for="CountryName" class="control-label"></label>
+                <input asp-for="CountryName" class="form-control" />
+                <span asp-validation-for="CountryName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

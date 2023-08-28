@@ -1,11 +1,14 @@
-﻿namespace EmploymentProjectTeam02.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace EmploymentProjectTeam02.Models
 {
     public class Country
     {
-        public int id { get; set; }
-        public String? countryName { get; set; }
-        public ICollection<State> states { get; set; } = new HashSet<State>();
-        public ICollection<Employee> employees { get; set; } = new HashSet<Employee>();
+        public int Id { get; set; }
+        [DisplayName("Country Name"),Required, MaxLength(50)]
+        public String CountryName { get; set; }
+       
 
     }
 }
