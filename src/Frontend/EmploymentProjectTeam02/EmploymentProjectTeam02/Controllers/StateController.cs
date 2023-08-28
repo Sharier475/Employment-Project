@@ -8,22 +8,16 @@ namespace EmploymentProjectTeam02.Controllers;
 public class StateController : Controller
 {
    private readonly HttpClient _httpClient;
-    public StateController()
+    public StateController(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
 
     public async Task<List<State>> GetAllState()
     {
-        var data = await _httpClient.GetAsync("State");
-        if (data.IsSuccessStatusCode)
-        {
-            var newData = await data.Content.ReadAsStringAsync();
-            var listSate = JsonConvert.DeserializeObject<List<State>>(newData);
-            return listSate;
-        }
-        return new List<State>();
+
+        var data = await _httpClient.GetFromJsonAsync<List<State>>("State");
+        return data is not null ? data : new List<State>();
     }
     public async Task<IActionResult> Index()
     {
@@ -38,24 +32,26 @@ public class StateController : Controller
     {
         if (id == 0)
         {
-            var response = await _httpClient.GetAsync("Country");
-            if (response.IsSuccessStatusCode)
+            var countryresponse = await _httpClient.GetAsync("Country");
+            if (countryresponse.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
+                var content = await countryresponse.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["stateId"] = new SelectList(stateList,"id", "countryName");
+                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
             }
+
             return View( new State());
         }
         else
         {
-            var data = await _httpClient.GetAsync("Country");
-            if (data.IsSuccessStatusCode)
+            var countryresponse = await _httpClient.GetAsync("Country");
+            if (countryresponse.IsSuccessStatusCode)
             {
-                var content = await data.Content.ReadAsStringAsync();
+                var content = await countryresponse.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
+                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
             }
+
             var response = await _httpClient.GetAsync($"State/{id}");
             if (response.IsSuccessStatusCode)
             {
@@ -92,7 +88,7 @@ public class StateController : Controller
             else
             {
                 //update Data
-                if (id != state.id)
+                if (id != state.Id)
                 {
                     return BadRequest();
                 }

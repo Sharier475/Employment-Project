@@ -9,22 +9,16 @@ public class CityController : Controller
 {
     private readonly HttpClient _httpClient;
 
-    public CityController()
+    public CityController(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
 
-    private async Task<List<City>> GetCityAll()
+    public async Task<List<City>> GetCityAll()
     {
-        var response = await _httpClient.GetAsync("City");
-        if (response.IsSuccessStatusCode)
-        {
-            var content = await response.Content.ReadAsStringAsync();
-            var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-            return citylist;
-        }
-        return new List<City>();
+
+        var data = await _httpClient.GetFromJsonAsync<List<City>>("City");
+        return data is not null ? data : new List<City>();
     }
     [HttpGet]
     public async Task<IActionResult> Index()
@@ -44,7 +38,7 @@ public class CityController : Controller
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
             }
             return View(new City());
         }
@@ -57,7 +51,7 @@ public class CityController : Controller
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
             }
 
             var Cityresponse = await _httpClient.GetAsync($"City/{id}");
@@ -97,7 +91,7 @@ public class CityController : Controller
             else
             {
                 //update Data
-                if (id != city.id)
+                if (id != city.Id)
                 {
                     return BadRequest();
                 }
