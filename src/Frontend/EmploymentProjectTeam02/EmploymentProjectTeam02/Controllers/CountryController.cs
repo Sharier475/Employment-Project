@@ -6,22 +6,16 @@ namespace EmploymentProjectTeam02.Controllers
 {
     public class CountryController : Controller
     {
-       private readonly HttpClient _httpClient;
-        public CountryController()
+        private readonly HttpClient _httpClient;
+        public CountryController(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7100/api/");
+            _httpClient = httpClientFactory.CreateClient("EmployeeApi");
         }
+
         public async Task<List<Country>> GetAllCountry() 
         {
-            var data = await _httpClient.GetAsync("Country");
-            if (data.IsSuccessStatusCode)
-            {
-                var newData =  await data.Content.ReadAsStringAsync();
-                var Countries = JsonConvert.DeserializeObject<List<Country>>(newData);
-                return Countries;
-            }
-            return new List<Country>();
+            var data = await _httpClient.GetFromJsonAsync<List<Country>>("Country");
+            return data is not null ? data : new List<Country>();
         }
         public async Task<IActionResult> Index()
         {
@@ -53,7 +47,7 @@ namespace EmploymentProjectTeam02.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> AddorEdit(Country country, int id)
         {
             if (id == 0)
@@ -67,7 +61,7 @@ namespace EmploymentProjectTeam02.Controllers
             else
             {
                 //Update
-                if(id != country.id)
+                if(id != country.Id)
                 {
                     return BadRequest();
 

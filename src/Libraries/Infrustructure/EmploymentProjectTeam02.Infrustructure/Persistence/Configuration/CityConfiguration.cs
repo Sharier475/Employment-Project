@@ -10,7 +10,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Persistence.Configuration
         {
             builder.ToTable("City");
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.State).WithMany(x => x.cities).HasForeignKey(x => x.StateId).IsRequired(true);
+            builder.HasOne(x => x.states).WithMany(x => x.cities).HasForeignKey(x => x.StateId).IsRequired(true);
         }
     }
 }

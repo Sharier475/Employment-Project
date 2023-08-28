@@ -7,9 +7,9 @@ namespace EmploymentProjectTeam02.Model;
 public class Employee : BaseEntity,IEntity
 {
   
-    public string? Name { get; set; }
-    public string? Address { get; set; }
-    public string? Gender { get; set; }
+    public string Name { get; set; }
+    public string Address { get; set; }
+    public string Gender { get; set; }
     public int DepartmentId { get; set; }
     public Department Department { get; set; }
     public DateTime Joiningdate { get; set; }
