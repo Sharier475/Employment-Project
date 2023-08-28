@@ -3,146 +3,162 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
-namespace EmploymentProjectTeam02.Controllers
+namespace EmploymentProjectTeam02.Controllers;
+
+public class EmployeeController : Controller
 {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public class EmployeeController : Controller
+    private readonly HttpClient _httpClient;
+    public EmployeeController(IHttpClientFactory httpClientFactory)
     {
-        private readonly HttpClient _httpClient;
-        public EmployeeController(IHttpClientFactory httpClientFactory)
-        {
-            _httpClient = httpClientFactory.CreateClient("EmployeeApi");
-        }
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
+    }
 
-        public async Task<List<Employee>> GetAllEmployee()
-        {
-            var data = await _httpClient.GetFromJsonAsync<List<Employee>>("Employee");
-            return data is not null ? data : new List<Employee>();
-        }
-        public async Task<IActionResult> Index()
-        {
-            var data = await GetAllEmployee();
-            return View(data);
-        }
+    public async Task<List<Employee>> GetAllEmployee()
+    {
+        var data = await _httpClient.GetFromJsonAsync<List<Employee>>("Employee");
+        return data is not null ? data : new List<Employee>();
+    }
+    public async Task<IActionResult> Index()
+    {
+        var data = await GetAllEmployee();
+        return View(data);
+    }
 
 
 
-        [HttpGet]
-        public async Task<IActionResult> AddorEdit(int id)
+    [HttpGet]
+    public async Task<IActionResult> AddorEdit(int id)
+    {
+        if (id == 0)
         {
-            if (id == 0)
+            var response = await _httpClient.GetAsync("State");
+            if (response.IsSuccessStatusCode)
             {
-                var response = await _httpClient.GetAsync("State");
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                    ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                var content = await response.Content.ReadAsStringAsync();
+                var stateList = JsonConvert.DeserializeObject<List<State>>(content);
+                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
 
 
-                }
-                var countryresponse = await _httpClient.GetAsync("Country");
-                if (countryresponse.IsSuccessStatusCode)
-                {
-                    var content = await countryresponse.Content.ReadAsStringAsync();
-                    var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                    ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
-                }
-
-                var deptresponse = await _httpClient.GetAsync("Department");
-
-                if (deptresponse.IsSuccessStatusCode)
-                {
-                    var content = await deptresponse.Content.ReadAsStringAsync();
-                    var departments = JsonConvert.DeserializeObject<List<Department>>(content);
-                    ViewData["DeptId"] = new SelectList(departments, "id", "departmentName");
-
-                }
-                var cityresponse = await _httpClient.GetAsync("City");
-                if (cityresponse.IsSuccessStatusCode)
-                {
-                    var content = await cityresponse.Content.ReadAsStringAsync();
-                    var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-                    ViewData["CityId"] = new SelectList(citylist, "id", "cityName");
-
-                }
-
-
-                return View(new Employee());
+            }
+            var countryresponse = await _httpClient.GetAsync("Country");
+            if (countryresponse.IsSuccessStatusCode)
+            {
+                var content = await countryresponse.Content.ReadAsStringAsync();
+                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
+                ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
             }
 
+            var deptresponse = await _httpClient.GetAsync("Department");
+
+            if (deptresponse.IsSuccessStatusCode)
+            {
+                var content = await deptresponse.Content.ReadAsStringAsync();
+                var departments = JsonConvert.DeserializeObject<List<Department>>(content);
+                ViewData["DeptId"] = new SelectList(departments, "id", "departmentName");
+
+            }
+            var cityresponse = await _httpClient.GetAsync("City");
+            if (cityresponse.IsSuccessStatusCode)
+            {
+                var content = await cityresponse.Content.ReadAsStringAsync();
+                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+                ViewData["CityId"] = new SelectList(citylist, "id", "cityName");
+
+            }
+
+
+            return View(new Employee());
+        }
+
+        else
+        {
+            var stateResponse = await _httpClient.GetAsync("State");
+
+            if (stateResponse.IsSuccessStatusCode)
+            {
+                var content = await stateResponse.Content.ReadAsStringAsync();
+                var stateList = JsonConvert.DeserializeObject<List<State>>(content);
+                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+            }
+            var countryresponse = await _httpClient.GetAsync("Country");
+            if (countryresponse.IsSuccessStatusCode)
+            {
+                var content = await countryresponse.Content.ReadAsStringAsync();
+                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
+                ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
+            }
+
+            var deptresponse = await _httpClient.GetAsync("Department");
+
+            if (deptresponse.IsSuccessStatusCode)
+            {
+                var content = await deptresponse.Content.ReadAsStringAsync();
+                var departments = JsonConvert.DeserializeObject<List<Department>>(content);
+                ViewData["DeptId"] = new SelectList(departments, "id", "departmentName");
+
+            }
+            var cityresponse = await _httpClient.GetAsync("City");
+            if (cityresponse.IsSuccessStatusCode)
+            {
+                var content = await cityresponse.Content.ReadAsStringAsync();
+                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+                ViewData["CityId"] = new SelectList(citylist, "id", "cityName");
+
+            }
+
+
+            var Cityresponse = await _httpClient.GetAsync($"Employee/{id}");
+            if (Cityresponse.IsSuccessStatusCode)
+            {
+                var departments = await Cityresponse.Content.ReadFromJsonAsync<Employee>();
+                return View(departments);
+            }
             else
             {
-                var stateResponse = await _httpClient.GetAsync("State");
+                return NotFound();
+            }
+        }
+    }
 
-                if (stateResponse.IsSuccessStatusCode)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddorEdit(int id, Employee employee, IFormFile pictureFile)
+    {
+        if (ModelState.IsValid)
+        {
+            //Save
+            if (id == 0)
+            {
+                if (pictureFile != null && pictureFile.Length > 0)
                 {
-                    var content = await stateResponse.Content.ReadAsStringAsync();
-                    var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                    ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", pictureFile.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        pictureFile.CopyTo(stream);
+                    }
+                    employee.Picture = $"{pictureFile.FileName}";
                 }
-                var countryresponse = await _httpClient.GetAsync("Country");
-                if (countryresponse.IsSuccessStatusCode)
+                var response = await _httpClient.PostAsJsonAsync("Employee", employee);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    var content = await countryresponse.Content.ReadAsStringAsync();
-                    var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                    ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
-                }
-
-                var deptresponse = await _httpClient.GetAsync("Department");
-
-                if (deptresponse.IsSuccessStatusCode)
-                {
-                    var content = await deptresponse.Content.ReadAsStringAsync();
-                    var departments = JsonConvert.DeserializeObject<List<Department>>(content);
-                    ViewData["DeptId"] = new SelectList(departments, "id", "departmentName");
-
-                }
-                var cityresponse = await _httpClient.GetAsync("City");
-                if (cityresponse.IsSuccessStatusCode)
-                {
-                    var content = await cityresponse.Content.ReadAsStringAsync();
-                    var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-                    ViewData["CityId"] = new SelectList(citylist, "id", "cityName");
-
-                }
-
-
-                var Cityresponse = await _httpClient.GetAsync($"Employee/{id}");
-                if (Cityresponse.IsSuccessStatusCode)
-                {
-                    var departments = await Cityresponse.Content.ReadFromJsonAsync<Employee>();
-                    return View(departments);
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    return NotFound();
+                    ModelState.AddModelError("", "Failed to create the country.");
+                    return View(employee);
                 }
             }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddorEdit(int id, Employee employee, IFormFile pictureFile)
-        {
-            if (ModelState.IsValid)
+            //update Data
+            else
             {
-                //Save
-                if (id == 0)
+
+                if (id != employee.Id)
+                {
+                    return BadRequest();
+                }
+                if (ModelState.IsValid)
                 {
                     if (pictureFile != null && pictureFile.Length > 0)
                     {
@@ -153,95 +169,63 @@ namespace EmploymentProjectTeam02.Controllers
                         }
                         employee.Picture = $"{pictureFile.FileName}";
                     }
-                    var response = await _httpClient.PostAsJsonAsync("Employee", employee);
+                    var response = await _httpClient.PutAsJsonAsync($"Employee/{id}", employee);
 
                     if (response.IsSuccessStatusCode)
                     {
+
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Failed to create the country.");
+                        ModelState.AddModelError("", "Failed to update the Employee.");
                         return View(employee);
                     }
                 }
-                //update Data
-                else
-                {
-
-                    if (id != employee.Id)
-                    {
-                        return BadRequest();
-                    }
-                    if (ModelState.IsValid)
-                    {
-                        if (pictureFile != null && pictureFile.Length > 0)
-                        {
-                            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", pictureFile.FileName);
-                            using (var stream = new FileStream(path, FileMode.Create))
-                            {
-                                pictureFile.CopyTo(stream);
-                            }
-                            employee.Picture = $"{pictureFile.FileName}";
-                        }
-                        var response = await _httpClient.PutAsJsonAsync($"Employee/{id}", employee);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Failed to update the Employee.");
-                            return View(employee);
-                        }
-                    }
-                    return View(employee);
-                }
-            }
-
-            return View(new Employee());
-        }
-
-        public async Task<IActionResult> Delete(int id)
-        {
-            var response = await _httpClient.DeleteAsync($"Employee/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return NotFound();
+                return View(employee);
             }
         }
-        public async Task<ActionResult> StateDropdownData(int countryId)
-        {
-            var response = await _httpClient.GetAsync("State");
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                List<State> filteredStates = stateList.Where(state => state.CountryId == countryId).ToList();
-                return Json(filteredStates);
-            }
-            return NotFound();
-        }
 
-
-        public async Task<ActionResult> CityDropdownData(int stateId)
-        {
-            var response = await _httpClient.GetAsync("City");
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var CityList = JsonConvert.DeserializeObject<List<City>>(content);
-                List<City> filteredStates = CityList.Where(state => state.StateId == stateId).ToList();
-                return Json(filteredStates);
-            }
-            return NotFound();
-        }
-
+        return View(new Employee());
     }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        var response = await _httpClient.DeleteAsync($"Employee/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+    public async Task<ActionResult> StateDropdownData(int countryId)
+    {
+        var response = await _httpClient.GetAsync("State");
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var stateList = JsonConvert.DeserializeObject<List<State>>(content);
+            List<State> filteredStates = stateList.Where(state => state.CountryId == countryId).ToList();
+            return Json(filteredStates);
+        }
+        return NotFound();
+    }
+
+
+    public async Task<ActionResult> CityDropdownData(int stateId)
+    {
+        var response = await _httpClient.GetAsync("City");
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var CityList = JsonConvert.DeserializeObject<List<City>>(content);
+            List<City> filteredStates = CityList.Where(state => state.StateId == stateId).ToList();
+            return Json(filteredStates);
+        }
+        return NotFound();
+    }
+
 }
