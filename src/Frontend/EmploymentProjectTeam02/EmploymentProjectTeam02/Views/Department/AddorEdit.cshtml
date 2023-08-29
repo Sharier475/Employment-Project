@@ -10,8 +10,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddorEdit" >
+        <form asp-action="AddorEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
             @Html.HiddenFor(model => model.Id)
             <div class="form-group">
                 <label asp-for="DepartmentName" class="control-label"></label>

@@ -7,7 +7,8 @@ namespace EmploymentProjectTeam02.Controllers;
 
 public class EmployeeController : Controller
 {
-    private readonly HttpClient _httpClient;
+   private readonly HttpClient _httpClient;
+
     public EmployeeController(IHttpClientFactory httpClientFactory)
     {
         _httpClient = httpClientFactory.CreateClient("EmployeeApi");
@@ -20,8 +21,8 @@ public class EmployeeController : Controller
     }
     public async Task<IActionResult> Index()
     {
-        var data = await GetAllEmployee();
-        return View(data);
+        var employee = await GetAllEmployee();
+        return View(employee);
     }
 
 
@@ -36,7 +37,7 @@ public class EmployeeController : Controller
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
 
 
             }
@@ -45,7 +46,7 @@ public class EmployeeController : Controller
             {
                 var content = await countryresponse.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
+                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
             }
 
             var deptresponse = await _httpClient.GetAsync("Department");
@@ -54,7 +55,7 @@ public class EmployeeController : Controller
             {
                 var content = await deptresponse.Content.ReadAsStringAsync();
                 var departments = JsonConvert.DeserializeObject<List<Department>>(content);
-                ViewData["DeptId"] = new SelectList(departments, "id", "departmentName");
+                ViewData["DeptId"] = new SelectList(departments, "Id", "DepartmentName");
 
             }
             var cityresponse = await _httpClient.GetAsync("City");
@@ -62,7 +63,7 @@ public class EmployeeController : Controller
             {
                 var content = await cityresponse.Content.ReadAsStringAsync();
                 var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-                ViewData["CityId"] = new SelectList(citylist, "id", "cityName");
+                ViewData["CityId"] = new SelectList(citylist, "Id", "CityName");
 
             }
 
@@ -78,14 +79,14 @@ public class EmployeeController : Controller
             {
                 var content = await stateResponse.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
             }
             var countryresponse = await _httpClient.GetAsync("Country");
             if (countryresponse.IsSuccessStatusCode)
             {
                 var content = await countryresponse.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "id", "countryName");
+                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
             }
 
             var deptresponse = await _httpClient.GetAsync("Department");
@@ -94,7 +95,7 @@ public class EmployeeController : Controller
             {
                 var content = await deptresponse.Content.ReadAsStringAsync();
                 var departments = JsonConvert.DeserializeObject<List<Department>>(content);
-                ViewData["DeptId"] = new SelectList(departments, "id", "departmentName");
+                ViewData["DeptId"] = new SelectList(departments, "Id", "DepartmentName");
 
             }
             var cityresponse = await _httpClient.GetAsync("City");
@@ -102,7 +103,7 @@ public class EmployeeController : Controller
             {
                 var content = await cityresponse.Content.ReadAsStringAsync();
                 var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-                ViewData["CityId"] = new SelectList(citylist, "id", "cityName");
+                ViewData["CityId"] = new SelectList(citylist, "Id", "CityName");
 
             }
 
@@ -110,8 +111,9 @@ public class EmployeeController : Controller
             var Cityresponse = await _httpClient.GetAsync($"Employee/{id}");
             if (Cityresponse.IsSuccessStatusCode)
             {
-                var departments = await Cityresponse.Content.ReadFromJsonAsync<Employee>();
-                return View(departments);
+                var content = await cityresponse.Content.ReadAsStringAsync();
+                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+                return View(citylist);
             }
             else
             {
@@ -119,6 +121,8 @@ public class EmployeeController : Controller
             }
         }
     }
+
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -227,5 +231,6 @@ public class EmployeeController : Controller
         }
         return NotFound();
     }
+
 
 }

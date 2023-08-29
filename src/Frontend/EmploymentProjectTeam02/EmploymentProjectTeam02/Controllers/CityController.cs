@@ -8,14 +8,14 @@ namespace EmploymentProjectTeam02.Controllers;
 public class CityController : Controller
 {
 
-    private readonly HttpClient _httpClient;
     public CityController(IHttpClientFactory httpClientFactory)
     {
         _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
 
-    public async Task<List<City>> GetAllCity()
+    public async Task<List<City>> GetCityAll()
     {
+
         var data = await _httpClient.GetFromJsonAsync<List<City>>("City");
         return data is not null ? data : new List<City>();
     }
@@ -52,7 +52,7 @@ public class CityController : Controller
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "id", "stateName");
+                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
             }
 
             var Cityresponse = await _httpClient.GetAsync($"City/{id}");

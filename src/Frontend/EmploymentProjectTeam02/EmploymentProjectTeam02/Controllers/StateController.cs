@@ -7,7 +7,7 @@ namespace EmploymentProjectTeam02.Controllers;
 
 public class StateController : Controller
 {
-    private readonly HttpClient _httpClient;
+   private readonly HttpClient _httpClient;
     public StateController(IHttpClientFactory httpClientFactory)
     {
         _httpClient = httpClientFactory.CreateClient("EmployeeApi");
@@ -15,6 +15,7 @@ public class StateController : Controller
 
     public async Task<List<State>> GetAllState()
     {
+
         var data = await _httpClient.GetFromJsonAsync<List<State>>("State");
         return data is not null ? data : new List<State>();
     }
@@ -32,24 +33,26 @@ public class StateController : Controller
       
         if (id == 0)
         {
-            var response = await _httpClient.GetAsync("Country");
-            if (response.IsSuccessStatusCode)
+            var countryresponse = await _httpClient.GetAsync("Country");
+            if (countryresponse.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var countryList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(countryList,"Id","CountryName");
+                var content = await countryresponse.Content.ReadAsStringAsync();
+                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
+                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
             }
+
             return View( new State());
         }
         else
         {
-            var data = await _httpClient.GetAsync("Country");
-            if (data.IsSuccessStatusCode)
+            var countryresponse = await _httpClient.GetAsync("Country");
+            if (countryresponse.IsSuccessStatusCode)
             {
-                var content = await data.Content.ReadAsStringAsync();
+                var content = await countryresponse.Content.ReadAsStringAsync();
                 var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
                 ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
             }
+
             var response = await _httpClient.GetAsync($"State/{id}");
             if (response.IsSuccessStatusCode)
             {

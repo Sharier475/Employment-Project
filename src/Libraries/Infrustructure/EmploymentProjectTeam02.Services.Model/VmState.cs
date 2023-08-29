@@ -8,7 +8,6 @@ public class VmState : IVm
     public int Id { get; set ; }
     public string StateName { get; set; }
     public int CountryId { get; set; }
-   
     public VmCountry Country { get; set; }
         
 

@@ -11,7 +11,8 @@ namespace EmploymentProjectTeam02.Services.Model
        
         public int Id { get ; set; }
        
-        public string StateName { get; set; } = string.Empty;
+        public VmState State { get; set; }
        
+        
     }
 }

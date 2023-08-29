@@ -4,17 +4,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(jsonOptions =>
-{
-    jsonOptions.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-    jsonOptions.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-    jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-});
+ {
+     jsonOptions.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+     jsonOptions.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+     jsonOptions.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+ });
 
 var baseUrl = builder.Configuration.GetValue<string>("EmploymentApiBase");
 builder.Services.AddHttpClient("EmployeeApi", c =>
 {
     c.BaseAddress = new Uri(baseUrl!);
 });
+
 
 var app = builder.Build();
 

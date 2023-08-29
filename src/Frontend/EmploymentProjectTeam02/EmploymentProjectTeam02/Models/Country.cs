@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EmploymentProjectTeam02.Models
 {
     public class Country
     {
         public int Id { get; set; }
-        [Required, MaxLength(25), DisplayName("Country Name")]
+        [DisplayName("Country Name"),Required, MaxLength(50)]
         public String CountryName { get; set; }
        
 

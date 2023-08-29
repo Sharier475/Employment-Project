@@ -7,6 +7,7 @@ namespace EmploymentProjectTeam02.Controllers
     public class DepartmentController : Controller
     {
         private readonly HttpClient _httpClient;
+
         public DepartmentController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("EmployeeApi");
@@ -47,42 +48,50 @@ namespace EmploymentProjectTeam02.Controllers
         }
 
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> AddorEdit( Department department,int id)
         {
-            if (id == 0)
+            if (ModelState.IsValid)
             {
-                //save//
-                var data = await _httpClient.PostAsJsonAsync("Department", department);
-                if (data.IsSuccessStatusCode)
+                if (id == 0)
                 {
-                    return RedirectToAction("Index");
-                }
-            }
-            else
-            {
-                //update//
-                if (id != department.Id)
-                {
-                    return BadRequest();
-                }
-                if (ModelState.IsValid)
-                {
-                    var response = await _httpClient.PutAsJsonAsync($"Department/{id}", department);
-
-                    if (response.IsSuccessStatusCode)
+                    //save//
+                    var data = await _httpClient.PostAsJsonAsync("Department", department);
+                    if (data.IsSuccessStatusCode)
                     {
-
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Failed to update the Department.");
-                        return View(department);
+                        ModelState.AddModelError("", "Error While Saving Data");
                     }
                 }
-                return View(department);
+                else
+                {
+                    //update//
+                    if (id != department.Id)
+                    {
+                        return BadRequest();
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        var response = await _httpClient.PutAsJsonAsync($"Department/{id}", department);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Failed to update the Department.");
+                            return View(department);
+                        }
+                    }
+                    return View(department);
+                }
             }
+
             return View(new Department());
         }
        
