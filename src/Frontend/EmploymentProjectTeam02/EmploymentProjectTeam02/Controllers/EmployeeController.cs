@@ -108,8 +108,9 @@ public class EmployeeController : Controller
             var Cityresponse = await _httpClient.GetAsync($"Employee/{id}");
             if (Cityresponse.IsSuccessStatusCode)
             {
-                var departments = await Cityresponse.Content.ReadFromJsonAsync<Employee>();
-                return View(departments);
+                var content = await cityresponse.Content.ReadAsStringAsync();
+                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+                return View(citylist);
             }
             else
             {

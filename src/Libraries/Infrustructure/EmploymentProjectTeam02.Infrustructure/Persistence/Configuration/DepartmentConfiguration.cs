@@ -9,6 +9,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.ToTable("Departments");
+            builder.HasIndex(x=>x.DepartmentName).IsUnique(true);
             builder.HasKey(x => x.Id);
             
         }
