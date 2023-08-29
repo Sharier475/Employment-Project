@@ -37,7 +37,6 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("LastModified")
@@ -74,7 +73,6 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("LastModified")
@@ -103,11 +101,10 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset?>("LastModified")
                         .HasColumnType("datetimeoffset");
@@ -119,6 +116,10 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentName")
+                        .IsUnique()
+                        .HasFilter("[DepartmentName] IS NOT NULL");
 
                     b.ToTable("Departments", (string)null);
                 });
@@ -147,7 +148,6 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DepartmentId")
@@ -214,7 +214,6 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset?>("LastModified")
