@@ -18,12 +18,12 @@ public class VmEmployee:IVm
     public string Picture { get; set; }
 
     public int CountryId { get; set; }
-    public VmCountry VmCountry { get; set; } 
+    public VmCountry Country { get; set; } 
 
     public int StateId { get; set; }
-    public VmState VmState { get; set; }
+    public VmState State { get; set; }
     
     public int CityId { get; set; }
-    public VmCity VmCity { get; set; }
+    public VmCity City { get; set; }
     public int Id { get ; set ; }
 }

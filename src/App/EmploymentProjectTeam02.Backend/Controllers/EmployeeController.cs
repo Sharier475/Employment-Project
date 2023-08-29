@@ -29,7 +29,7 @@ namespace EmploymentProjectTeam02.Backend.Controllers
 
         public async Task<ActionResult<VmEmployee>> GetById(int id)
         {
-            var data = await _mediator.Send(new GetAllEmployeeQuery());
+            var data = await _mediator.Send(new GetEmployeeById(id));
             return Ok(data);
         }
         [HttpPost]
