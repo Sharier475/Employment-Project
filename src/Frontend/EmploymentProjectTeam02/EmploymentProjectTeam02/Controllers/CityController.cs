@@ -22,7 +22,7 @@ public class CityController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var data = await GetAllCity();
+        var data = await GetCityAll();
         return View(data);
     }
   

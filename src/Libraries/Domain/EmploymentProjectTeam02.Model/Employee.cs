@@ -1,4 +1,5 @@
 ﻿using EmploymentProjectTeam02.Shared.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,4 +25,5 @@ public class Employee : BaseEntity,IEntity
     public State State { get; set; }
     public int CityId { get; set; }
     public City City { get; set; } 
+    public IFormFile PictureFile { get; set; }
 }
