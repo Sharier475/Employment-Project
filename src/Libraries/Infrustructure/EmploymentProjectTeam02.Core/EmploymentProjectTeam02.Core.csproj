@@ -10,6 +10,9 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\EmploymentProjectTeam02.Model\EmploymentProjectTeam02.Model.csproj" />

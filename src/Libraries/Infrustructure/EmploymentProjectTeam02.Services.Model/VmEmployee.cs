@@ -1,4 +1,5 @@
 ﻿using EmploymentProjectTeam02.Shared.Common;
+using Microsoft.AspNetCore.Http;
 
 namespace EmploymentProjectTeam02.Services.Model;
 
@@ -26,4 +27,6 @@ public class VmEmployee:IVm
     public int CityId { get; set; }
     public VmCity City { get; set; }
     public int Id { get ; set ; }
+
+    public IFormFile PictureFile { get; set; }
 }
