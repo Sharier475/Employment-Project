@@ -23,8 +23,8 @@ public class CityController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var listCiy = await GetCityAll();
-        return View(listCiy);
+        var listCity = await GetCityAll();
+        return View(listCity);
     }
 
 

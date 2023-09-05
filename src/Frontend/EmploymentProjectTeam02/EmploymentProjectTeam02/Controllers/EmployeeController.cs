@@ -27,42 +27,43 @@ public class EmployeeController : Controller
     [HttpGet]
     public async Task<IActionResult> AddorEdit(int id)
     {
+        var response = await _httpClient.GetAsync("State");
+        if (response.IsSuccessStatusCode)
+        {
+            var content = await response.Content.ReadAsStringAsync();
+            var stateList = JsonConvert.DeserializeObject<List<State>>(content);
+            ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
+
+
+        }
+        var countryresponse = await _httpClient.GetAsync("Country");
+        if (countryresponse.IsSuccessStatusCode)
+        {
+            var content = await countryresponse.Content.ReadAsStringAsync();
+            var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
+            ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
+        }
+
+        var deptresponse = await _httpClient.GetAsync("Department");
+
+        if (deptresponse.IsSuccessStatusCode)
+        {
+            var content = await deptresponse.Content.ReadAsStringAsync();
+            var departments = JsonConvert.DeserializeObject<List<Department>>(content);
+            ViewData["DeptId"] = new SelectList(departments, "Id", "DepartmentName");
+
+        }
+        var cityresponse = await _httpClient.GetAsync("City");
+        if (cityresponse.IsSuccessStatusCode)
+        {
+            var content = await cityresponse.Content.ReadAsStringAsync();
+            var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+            ViewData["CityId"] = new SelectList(citylist, "Id", "CityName");
+
+        }
         if (id == 0)
         {
-            var response = await _httpClient.GetAsync("State");
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
-
-
-            }
-            var countryresponse = await _httpClient.GetAsync("Country");
-            if (countryresponse.IsSuccessStatusCode)
-            {
-                var content = await countryresponse.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
-            }
-
-            var deptresponse = await _httpClient.GetAsync("Department");
-
-            if (deptresponse.IsSuccessStatusCode)
-            {
-                var content = await deptresponse.Content.ReadAsStringAsync();
-                var departments = JsonConvert.DeserializeObject<List<Department>>(content);
-                ViewData["DeptId"] = new SelectList(departments, "Id", "DepartmentName");
-
-            }
-            var cityresponse = await _httpClient.GetAsync("City");
-            if (cityresponse.IsSuccessStatusCode)
-            {
-                var content = await cityresponse.Content.ReadAsStringAsync();
-                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-                ViewData["CityId"] = new SelectList(citylist, "Id", "CityName");
-
-            }
+            
 
 
             return View(new Employee());
@@ -70,46 +71,47 @@ public class EmployeeController : Controller
 
         else
         {
-            var stateResponse = await _httpClient.GetAsync("State");
+            //var stateResponse = await _httpClient.GetAsync("State");
 
-            if (stateResponse.IsSuccessStatusCode)
-            {
-                var content = await stateResponse.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<State>>(content);
-                ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
-            }
-            var countryresponse = await _httpClient.GetAsync("Country");
-            if (countryresponse.IsSuccessStatusCode)
-            {
-                var content = await countryresponse.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
-            }
+            //if (stateResponse.IsSuccessStatusCode)
+            //{
+            //    var content = await stateResponse.Content.ReadAsStringAsync();
+            //    var stateList = JsonConvert.DeserializeObject<List<State>>(content);
+            //    ViewData["StateId"] = new SelectList(stateList, "Id", "StateName");
+            //}
+            //var countryresponse = await _httpClient.GetAsync("Country");
+            //if (countryresponse.IsSuccessStatusCode)
+            //{
+            //    var content = await countryresponse.Content.ReadAsStringAsync();
+            //    var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
+            //    ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
+            //}
 
-            var deptresponse = await _httpClient.GetAsync("Department");
+            //var deptresponse = await _httpClient.GetAsync("Department");
 
-            if (deptresponse.IsSuccessStatusCode)
-            {
-                var content = await deptresponse.Content.ReadAsStringAsync();
-                var departments = JsonConvert.DeserializeObject<List<Department>>(content);
-                ViewData["DeptId"] = new SelectList(departments, "Id", "DepartmentName");
+            //if (deptresponse.IsSuccessStatusCode)
+            //{
+            //    var content = await deptresponse.Content.ReadAsStringAsync();
+            //    var departments = JsonConvert.DeserializeObject<List<Department>>(content);
+            //    ViewData["DeptId"] = new SelectList(departments, "Id", "DepartmentName");
 
-            }
-            var cityresponse = await _httpClient.GetAsync("City");
-            if (cityresponse.IsSuccessStatusCode)
-            {
-                var content = await cityresponse.Content.ReadAsStringAsync();
-                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
-                ViewData["CityId"] = new SelectList(citylist, "Id", "CityName");
+            //}
+            //var cityresponse = await _httpClient.GetAsync("City");
+            //if (cityresponse.IsSuccessStatusCode)
+            //{
+            //    var content = await cityresponse.Content.ReadAsStringAsync();
+            //    var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+            //    ViewData["CityId"] = new SelectList(citylist, "Id", "CityName");
 
-            }
+            //}
 
 
             var Cityresponse = await _httpClient.GetAsync($"Employee/{id}");
             if (Cityresponse.IsSuccessStatusCode)
             {
-                var content = await cityresponse.Content.ReadAsStringAsync();
-                var citylist = JsonConvert.DeserializeObject<List<City>>(content);
+                
+                var content = await Cityresponse.Content.ReadAsStringAsync();
+                var citylist = JsonConvert.DeserializeObject<Employee>(content);
                 return View(citylist);
             }
             else
