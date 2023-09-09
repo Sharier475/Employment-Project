@@ -20,4 +20,8 @@
     <ProjectReference Include="..\..\Libraries\Infrustructure\EmploymentProjectTeam02.IoC.Configuration\EmploymentProjectTeam02.IoC.Configuration.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\profiles\" />
+  </ItemGroup>
+
 </Project>

@@ -1,113 +1,50 @@
 ﻿using EmploymentProjectTeam02.Models;
+using EmploymentProjectTeam02.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
-namespace EmploymentProjectTeam02.Controllers
+namespace EmploymentProjectTeam02.Controllers;
+
+public class CountryController : Controller
 {
-    public class CountryController : Controller
+    private ICountryRepository _countryRepository;
+    public CountryController(ICountryRepository countryRepository) => _countryRepository = countryRepository;
+    public async Task<IActionResult> Index()=> View(await _countryRepository.GetAll());
+    [HttpGet]
+    public async Task<IActionResult> AddorEdit(int id)
     {
-       private readonly HttpClient _httpClient;
-        public CountryController(IHttpClientFactory httpClientFactory)
+        if (id == 0) return View(new Country());
+        else
         {
-            _httpClient = httpClientFactory.CreateClient("EmployeeApi");
-        }
-        public async Task<List<Country>> GetAllCountry()
-        {
-            var data = await _httpClient.GetFromJsonAsync<List<Country>>("Country");
-            return data is not null ? data : new List<Country>();
-        }
-        public async Task<IActionResult> Index()
-        {
-            var data = await GetAllCountry();
+            var data = await _countryRepository.GetById(id);
             return View(data);
         }
-
-
-        [HttpGet]
-        public async Task<IActionResult> AddorEdit(int id)
+    }
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddorEdit(Country country, int id)
+    {
+        if (ModelState.IsValid)
         {
-            if(id == 0)
+            if (id == 0)
             {
-                return View(new Country());
+                //Save//
+                await _countryRepository.Insert(country);
+                return RedirectToAction(nameof(Index));
             }
             else
-            {
-                var response = await _httpClient.GetAsync($"Country/{id}");
-                if (response.IsSuccessStatusCode)
+            {         //Update
+                if (ModelState.IsValid)
                 {
-                    var countries = await response.Content.ReadFromJsonAsync<Country>();
-                    return View(countries);
+                    await _countryRepository.Update(id, country);
+                    return RedirectToAction(nameof(Index));
                 }
-                else
-                {
-                    return NotFound();
-                }
+                return View(country);
             }
         }
-
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddorEdit(Country country, int id)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == 0)
-                {
-                    var data = await _httpClient.PostAsJsonAsync("Country", country);
-                    if (data.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                }
-                else
-                {
-                    //Update
-                    if (id != country.Id)
-                    {
-                        return BadRequest();
-
-                    }
-                    if (ModelState.IsValid)
-                    {
-                        var response = await _httpClient.PutAsJsonAsync($"Country/{id}", country);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Failed tot update the Country.");
-                            return View(country);
-                        }
-                    }
-                    return View(country);
-
-
-                }
-                
-
-
-            }
-            return View(new Country());
-        }
-               
-   
-            
-
-
-
-
-        public async Task<ActionResult> Delete(int id)
-        {
-            var response = await _httpClient.DeleteAsync($"Country/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
+        return View(new Country());
+    }
+    public async Task<ActionResult> Delete(int id)
+    {
+        await _countryRepository.Delete(id);
+        return RedirectToAction(nameof(Index));
     }
 }

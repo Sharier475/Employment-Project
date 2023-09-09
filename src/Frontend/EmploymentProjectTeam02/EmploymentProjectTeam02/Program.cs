@@ -1,3 +1,5 @@
+using EmploymentProjectTeam02.Service;
+using EmploymentProjectTeam02.Service.Interface;
 using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,16 @@ builder.Services.AddHttpClient("EmployeeApi", c =>
 {
     c.BaseAddress = new Uri(baseUrl!);
 });
+
+//
+builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<ICityRepository, CityRepository>();
+builder.Services.AddTransient<IStateRepository, StateRepository>();
+builder.Services.AddTransient<ICountryRepository, CountryRepository>();
+
+
+
 
 
 var app = builder.Build();

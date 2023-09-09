@@ -1,68 +1,32 @@
 ﻿using EmploymentProjectTeam02.Models;
+using EmploymentProjectTeam02.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
-
 namespace EmploymentProjectTeam02.Controllers;
 
 public class StateController : Controller
 {
-   private readonly HttpClient _httpClient;
-    public StateController(IHttpClientFactory httpClientFactory)
+  
+   private readonly IStateRepository _stateRepository;
+    private readonly ICountryRepository _countryRepository;
+    public StateController(IStateRepository stateRepository, ICountryRepository countryRepository)
     {
-        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
+        _stateRepository = stateRepository;
+        _countryRepository = countryRepository;
     }
 
-    public async Task<List<State>> GetAllState()
-    {
-
-        var data = await _httpClient.GetFromJsonAsync<List<State>>("State");
-        return data is not null ? data : new List<State>();
-    }
-    public async Task<IActionResult> Index()
-    {
-        var data = await GetAllState();
-        return View(data);
-    }
-
-    
-
+    public async Task<IActionResult> Index()=>View(await _stateRepository.GetAll());
+   
     [HttpGet]
     public async Task<IActionResult> AddorEdit(int id)
     {
-        if (id == 0)
-        {
-            var countryresponse = await _httpClient.GetAsync("Country");
-            if (countryresponse.IsSuccessStatusCode)
-            {
-                var content = await countryresponse.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
-            }
-
-            return View( new State());
-        }
+        ViewData["CountryId"] = await _countryRepository.Dropdown();
+        if (id == 0) return View(new State());
         else
         {
-            var countryresponse = await _httpClient.GetAsync("Country");
-            if (countryresponse.IsSuccessStatusCode)
-            {
-                var content = await countryresponse.Content.ReadAsStringAsync();
-                var stateList = JsonConvert.DeserializeObject<List<Country>>(content);
-                ViewData["countryId"] = new SelectList(stateList, "Id", "CountryName");
-            }
-
-            var response = await _httpClient.GetAsync($"State/{id}");
-            if (response.IsSuccessStatusCode)
-            {
-                var newData = await response.Content.ReadFromJsonAsync<State>();
-                return View(newData);
-            }
-            else
-            {
-                return NotFound();
-            }
+            var response = await _stateRepository.GetById(id);
+            if (response != null) return View(response);
         }
+        return View(new State());
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -73,39 +37,19 @@ public class StateController : Controller
             if (id == 0)
             {
                 //save data
-                var response = await _httpClient.PostAsJsonAsync("State", state);
-
-                if (response.IsSuccessStatusCode)
+                if (ModelState.IsValid)
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Failed to create the State.");
-                    return View(state);
+                    await _stateRepository.Insert(state);
+                    return RedirectToAction(nameof(Index));
                 }
             }
             else
             {
-                //update Data
-                if (id != state.Id)
-                {
-                    return BadRequest();
-                }
+                //UPDATE//
                 if (ModelState.IsValid)
                 {
-                    var response = await _httpClient.PutAsJsonAsync($"State/{id}", state);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Failed to update the State.");
-                        return View(state);
-                    }
+                    await _stateRepository.Update(id, state);
+                    return RedirectToAction(nameof(Index));
                 }
                 return View(state);
             }
@@ -116,14 +60,7 @@ public class StateController : Controller
 
     public async Task<IActionResult> Delete(int id)
     {
-        var response = await _httpClient.DeleteAsync($"State/{id}");
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index");
-        }
-        else
-        {
-            return NotFound();
-        }
+        await _stateRepository.Delete(id);
+        return RedirectToAction(nameof(Index));
     }
 }

@@ -1,112 +1,49 @@
 ﻿using EmploymentProjectTeam02.Models;
+using EmploymentProjectTeam02.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
-namespace EmploymentProjectTeam02.Controllers
+namespace EmploymentProjectTeam02.Controllers;
+
+public class DepartmentController : Controller
 {
-    public class DepartmentController : Controller
+    private IDepartmentRepository  _departmentRepository;
+    public DepartmentController(IDepartmentRepository departmentRepository) => _departmentRepository = departmentRepository;
+    public async Task<IActionResult> Index()=> View(await _departmentRepository.GetAll());
+    [HttpGet]
+    public async Task<IActionResult> AddorEdit(int id)
     {
-        private readonly HttpClient _httpClient;
-
-        public DepartmentController(IHttpClientFactory httpClientFactory)
+        if (id == 0) return View(new Department());
+        else
         {
-            _httpClient = httpClientFactory.CreateClient("EmployeeApi");
-        }
-
-        public async Task<List<Department>> GetAllDepartment()
-        {
-            var data = await _httpClient.GetFromJsonAsync<List<Department>>("Department");
-            return data is not null ? data : new List<Department>();
-        }
-        public async Task<IActionResult> Index()
-        {
-           var data= await GetAllDepartment();
+            var data = await _departmentRepository.GetById(id);
             return View(data);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> AddorEdit(int id)
+    }
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddorEdit(Department department , int id)
+    {
+        if (ModelState.IsValid)
         {
             if (id == 0)
             {
-                return View(new Department());
-            }
-            else
-            {
-                var response = await _httpClient.GetAsync($"Department/{id}");
-                if (response.IsSuccessStatusCode)
-                {
-                    var departments = await response.Content.ReadFromJsonAsync<Department>();
-                    return View(departments);
-                }
-                else
-                {
-                    return NotFound();
-                }
-            }
-           
-        }
-
-
-        [HttpPost,ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddorEdit( Department department,int id)
-        {
-            if (ModelState.IsValid)
-            {
-                if (id == 0)
-                {
-                    //save//
-                    var data = await _httpClient.PostAsJsonAsync("Department", department);
-                    if (data.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Error While Saving Data");
-                    }
-                }
-                else
-                {
-                    //update//
-                    if (id != department.Id)
-                    {
-                        return BadRequest();
-                    }
-                    if (ModelState.IsValid)
-                    {
-                        var response = await _httpClient.PutAsJsonAsync($"Department/{id}", department);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Failed to update the Department.");
-                            return View(department);
-                        }
-                    }
-                    return View(department);
-                }
-            }
-
-            return View(new Department());
-        }
-       
-        public async Task<ActionResult> Delete(int id)
-        {
-            var response = await _httpClient.DeleteAsync($"Department/{id}");
-            if (response.IsSuccessStatusCode)
-            {
+                await _departmentRepository.Insert(department);
                 return RedirectToAction("Index");
             }
             else
-            {
-                return NotFound();
+            {      
+                if (ModelState.IsValid)
+                {
+                    await _departmentRepository.Update(id, department);
+                    return RedirectToAction("Index");
+                }
+                return View(department);
             }
         }
-
+        return View(new Department());
+    }
+    public async Task<ActionResult> Delete(int id)
+    {
+        await _departmentRepository.Delete(id);
+        return RedirectToAction("Index");
     }
 }

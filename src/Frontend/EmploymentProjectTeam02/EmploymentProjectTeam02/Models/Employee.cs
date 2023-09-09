@@ -1,4 +1,7 @@
-﻿namespace EmploymentProjectTeam02.Models
+﻿using Microsoft.AspNetCore.Http;
+using System.Text.Json.Serialization;
+
+namespace EmploymentProjectTeam02.Models
 {
     public class Employee
     {
@@ -13,6 +16,7 @@
         public Boolean Hsc { get; set; }
         public Boolean Bsc { get; set; }
         public Boolean Msc { get; set; }
+        [JsonIgnore]
         public string Picture { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
@@ -20,5 +24,7 @@
         public State State { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+
+        public IFormFile PictureFile { get; set; }  
     }
 }
