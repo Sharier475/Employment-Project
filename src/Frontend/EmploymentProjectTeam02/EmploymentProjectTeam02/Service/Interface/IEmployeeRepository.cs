@@ -5,4 +5,5 @@ namespace EmploymentProjectTeam02.Service.Interface;
 
 public interface IEmployeeRepository:IRepository<Employee>
 {
+    void Create(Employee employee);
 }

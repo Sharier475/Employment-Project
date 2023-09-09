@@ -12,15 +12,11 @@ public class UpdateCountryHandler : IRequestHandler<UpdateCountry, VmCountry>
 
     private readonly ICountryRepository _countryRepository;
     private readonly IMapper _mapper;
-
     public UpdateCountryHandler(ICountryRepository countryRepository,IMapper mapper)
     {
         _countryRepository = countryRepository;
         _mapper = mapper;
     }
-    public async Task<VmCountry> Handle(UpdateCountry request, CancellationToken cancellationToken)
-    {
-        var data=_mapper.Map<Model.Country>(request.VmCountry);
-       return await _countryRepository.Update(request.Id,data); 
-    }
+    public async Task<VmCountry> Handle(UpdateCountry request, CancellationToken cancellationToken)=> await _countryRepository.Update(request.Id, _mapper.Map<Model.Country>(request.VmCountry)); 
+    
 }

@@ -17,7 +17,7 @@ namespace EmploymentProjectTeam02.IoC.Configuration
             services.AddAutoMapper(typeof(CommonMapper).Assembly);
 
             //Repository add...
-            services.AddTransient<IDepartmentRepositpry, DepartmentRepository>();
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
             services.AddTransient<ICountryRepository, CountryRepository>();
             services.AddTransient<IStateRepository, StateRepository>();
             services.AddTransient<ICityRepository, CityRepository>();

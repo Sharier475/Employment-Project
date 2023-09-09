@@ -17,10 +17,7 @@ public class UpdateCityHandler : IRequestHandler<UpdateCity, VmCity>
         _cityRepository = cityRepository;
         _mapper = mapper;
     }
-    public async Task<VmCity> Handle(UpdateCity request, CancellationToken cancellationToken)
-    {
-        var data = _mapper.Map<Model.City>(request.VmCity);
-        return await _cityRepository.Update(request.Id,data);
-    }
+    public async Task<VmCity> Handle(UpdateCity request, CancellationToken cancellationToken)=> await _cityRepository.Update(request.Id, _mapper.Map<Model.City>(request.VmCity));
+    
 }
 

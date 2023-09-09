@@ -9,13 +9,8 @@ public record DeleteCity(int Id) : IRequest<VmCity>;
 public class DeleteCityHandler : IRequestHandler<DeleteCity, VmCity>
 {
     private readonly ICityRepository _cityRepository;
-    public DeleteCityHandler(ICityRepository cityRepository, IMapper mapper)
-    {
-        _cityRepository = cityRepository;
-    }
-    public async Task<VmCity> Handle(DeleteCity request, CancellationToken cancellationToken)
-    {
-        return await _cityRepository.Delete(request.Id);
-    }
+    public DeleteCityHandler(ICityRepository cityRepository)=>_cityRepository = cityRepository;
+    public async Task<VmCity> Handle(DeleteCity request, CancellationToken cancellationToken)=> await _cityRepository.Delete(request.Id);
+    
 }
 

@@ -15,9 +15,6 @@ public class CreateCityHandler : IRequestHandler<CreateCity, VmCity>
         _cityRepository = cityRepository;
         _mapper = mapper;
     }
-    public async Task<VmCity> Handle(CreateCity request, CancellationToken cancellationToken)
-    {
-        var data = _mapper.Map<Model.City>(request.VmCity);
-        return await _cityRepository.Add(data);
-    }
+    public async Task<VmCity> Handle(CreateCity request, CancellationToken cancellationToken)=> await _cityRepository.Add(_mapper.Map<Model.City>(request.VmCity));
+    
 }

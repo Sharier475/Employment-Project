@@ -2,7 +2,6 @@
 using EmploymentProjectTeam02.Core.Country.Query;
 using EmploymentProjectTeam02.Services.Model;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmploymentProjectTeam02.Backend.Controllers;

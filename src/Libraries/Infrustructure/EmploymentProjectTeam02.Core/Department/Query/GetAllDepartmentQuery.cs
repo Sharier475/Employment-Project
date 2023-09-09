@@ -15,8 +15,8 @@ namespace EmploymentProjectTeam02.Core.Department.Query
     IRequestHandler<GetAllDepartmentQuery,
     IEnumerable<VmDepartment>>
     {
-        private readonly IDepartmentRepositpry _departmentRepositpry;
-        public GetAllDepartmentQueryHandler(IDepartmentRepositpry departmentrepositpry, IMapper mapper)
+        private readonly IDepartmentRepository _departmentRepositpry;
+        public GetAllDepartmentQueryHandler(IDepartmentRepository departmentrepositpry, IMapper mapper)
         {
             _departmentRepositpry = departmentrepositpry;
         }

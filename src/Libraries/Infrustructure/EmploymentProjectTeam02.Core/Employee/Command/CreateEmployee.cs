@@ -13,29 +13,28 @@ public class CreateEmployeeHandler : IRequestHandler<CreateEmployee, VmEmployee>
 {
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IMapper _mapper;
-    private readonly IWebHostEnvironment _webHostEnvironment;
+    
     public CreateEmployeeHandler(IEmployeeRepository employeeRepository,
-                                 IMapper mapper,IWebHostEnvironment webHostEnvironment)
+                                 IMapper mapper)
     {
         _employeeRepository = employeeRepository;
         _mapper = mapper;
-        _webHostEnvironment = webHostEnvironment;
+       
     }
     public async Task<VmEmployee> Handle(CreateEmployee request, CancellationToken cancellationToken)
     {
 
         if (request.VmEmployee.PictureFile?.Length > 0)
         {
-            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "wwroot/images/profiles");
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + request.VmEmployee.PictureFile.FileName;
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-            using (var fileStream = new FileStream(filePath, FileMode.Create, access: FileAccess.ReadWrite))
+            if (request.VmEmployee.PictureFile != null && request.VmEmployee.PictureFile.Length > 0)
             {
-                var file = request.VmEmployee.PictureFile.OpenReadStream();
-                await file.CopyToAsync(fileStream, cancellationToken);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/profiles", request.VmEmployee.PictureFile.FileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    request.VmEmployee.PictureFile.CopyTo(stream);
+                }
+                request.VmEmployee.Picture = $"{request.VmEmployee.PictureFile.FileName}";
             }
-            request.VmEmployee.Picture = uniqueFileName;
         }
 
         return await _employeeRepository.Add(_mapper.Map<Model.Employee>(request.VmEmployee));

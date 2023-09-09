@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors("corsapp");
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

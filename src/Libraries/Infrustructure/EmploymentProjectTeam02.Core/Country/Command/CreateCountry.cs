@@ -8,7 +8,6 @@ namespace EmploymentProjectTeam02.Core.Country.Command;
 public record CreateCountry(VmCountry VmCountry):IRequest<VmCountry>;
 public class CreateCountryHandler : IRequestHandler<CreateCountry, VmCountry>
 {
-
     private readonly ICountryRepository _countryRepository;
     private readonly IMapper _mapper;
     public CreateCountryHandler(ICountryRepository countryRepository,IMapper mapper)
@@ -16,10 +15,6 @@ public class CreateCountryHandler : IRequestHandler<CreateCountry, VmCountry>
         _countryRepository = countryRepository;
         _mapper = mapper;
     }
-
-    public async Task<VmCountry> Handle(CreateCountry request, CancellationToken cancellationToken)
-    {
-       var data=_mapper.Map<Model.Country>(request.VmCountry);
-        return await _countryRepository.Add(data);
-    }
+    public async Task<VmCountry> Handle(CreateCountry request, CancellationToken cancellationToken)=> await _countryRepository.Add(_mapper.Map<Model.Country>(request.VmCountry));
+    
 }

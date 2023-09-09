@@ -15,19 +15,14 @@ namespace EmploymentProjectTeam02.Core.Department.Command
     public class CrateDepartmentHandler :
     IRequestHandler<CreateDepartment, VmDepartment>
     {
-        private readonly IDepartmentRepositpry _departmentRepositpry;
+        private readonly IDepartmentRepository  _departmentRepository;
         private readonly IMapper _mapper;
-
-        public CrateDepartmentHandler (IDepartmentRepositpry departmentRepositpry, IMapper mapper)
+        public CrateDepartmentHandler (IDepartmentRepository departmentRepository, IMapper mapper)
         {
-            _departmentRepositpry = departmentRepositpry;
+            _departmentRepository = departmentRepository;
             _mapper = mapper;
         }
-
-        public async Task<VmDepartment> Handle(CreateDepartment request, CancellationToken cancellationToken)
-        {
-            var data = _mapper.Map<Model.Department>(request.VmDepartment);
-            return await _departmentRepositpry.Add(data);
-        }
+        public async Task<VmDepartment> Handle(CreateDepartment request, CancellationToken cancellationToken)=> await _departmentRepository.Add(_mapper.Map<Model.Department>(request.VmDepartment));
+        
     }
 }

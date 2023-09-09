@@ -15,10 +15,10 @@ VmDepartment) : IRequest<VmDepartment>;
     public class UpdateDepartmentHandler :
     IRequestHandler<UpdateDepartment, VmDepartment>
     {
-        private readonly IDepartmentRepositpry _departmentRepositpry;
+        private readonly IDepartmentRepository _departmentRepositpry;
         private readonly IMapper _mapper;
 
-        public UpdateDepartmentHandler(IDepartmentRepositpry departmentRepositpry, IMapper mapper)
+        public UpdateDepartmentHandler(IDepartmentRepository departmentRepositpry, IMapper mapper)
         {
             _departmentRepositpry = departmentRepositpry;
             _mapper=mapper;

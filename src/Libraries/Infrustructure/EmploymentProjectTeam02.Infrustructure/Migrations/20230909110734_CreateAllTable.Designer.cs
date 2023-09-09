@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmploymentProjectTeam02.Infrustructure.Migrations
 {
     [DbContext(typeof(EmploymentDbContext))]
-    [Migration("20230904095858_AllTable")]
-    partial class AllTable
+    [Migration("20230909110734_CreateAllTable")]
+    partial class CreateAllTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,7 +162,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                     b.Property<bool>("HSc")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Joiningdate")
+                    b.Property<DateTime>("JoiningDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTimeOffset?>("LastModified")

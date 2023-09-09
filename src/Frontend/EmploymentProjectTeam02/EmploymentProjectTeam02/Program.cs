@@ -16,6 +16,7 @@ var baseUrl = builder.Configuration.GetValue<string>("EmploymentApiBase");
 builder.Services.AddHttpClient("EmployeeApi", c =>
 {
     c.BaseAddress = new Uri(baseUrl!);
+
 });
 
 //

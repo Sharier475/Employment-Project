@@ -12,7 +12,7 @@ public class Employee : BaseEntity,IEntity
     public string Gender { get; set; }
     public int DepartmentId { get; set; }
     public Department Department { get; set; }
-    public DateTime Joiningdate { get; set; }
+    public DateTime JoiningDate { get; set; }
     public Boolean SSc { get; set; }
     public Boolean HSc { get; set; }
     public Boolean BSc { get; set; }

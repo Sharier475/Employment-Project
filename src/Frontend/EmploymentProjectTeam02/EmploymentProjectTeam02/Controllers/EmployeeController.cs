@@ -1,6 +1,10 @@
 ﻿using EmploymentProjectTeam02.Models;
 using EmploymentProjectTeam02.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 
 namespace EmploymentProjectTeam02.Controllers;
 
@@ -11,14 +15,16 @@ public class EmployeeController : Controller
     private readonly IEmployeeRepository _employeeRepository;
     private readonly ICountryRepository _countryRepository;
     private readonly IDepartmentRepository _departmentRepository;
+    private readonly HttpClient _httpClient;
 
-    public EmployeeController(ICityRepository cityRepository, IStateRepository stateRepository, IEmployeeRepository employeeRepository, ICountryRepository countryRepository, IDepartmentRepository departmentRepository)
+    public EmployeeController(IHttpClientFactory httpClientFactory, ICityRepository cityRepository, IStateRepository stateRepository, IEmployeeRepository employeeRepository, ICountryRepository countryRepository, IDepartmentRepository departmentRepository)
     {
         _cityRepository = cityRepository;
         _stateRepository = stateRepository;
         _employeeRepository = employeeRepository;
         _countryRepository = countryRepository;
         _departmentRepository = departmentRepository;
+        _httpClient = httpClientFactory.CreateClient("EmployeeApi");
     }
 
     public async Task<IActionResult> Index()=>View(await _employeeRepository.GetAll());
@@ -40,16 +46,18 @@ public class EmployeeController : Controller
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddorEdit(int id, Employee  employee)
+    public async Task<IActionResult> AddorEdit(int id, [FromForm] Employee employee )
     {
         if (ModelState.IsValid)
         {
             if (id == 0)
             {
+                
+
                 //save data
                 if (ModelState.IsValid)
                 {
-                    await _employeeRepository.Insert(employee);
+                    _employeeRepository.Create(employee);
                     return RedirectToAction(nameof(Index));
                 }
             }

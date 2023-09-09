@@ -17,8 +17,8 @@ public class CommonMapper : Profile
         CreateMap<VmCountry, Model.Country>().ReverseMap();
         CreateMap<VmState, Model.State>().ReverseMap();
         CreateMap<VmCity, Model.City>().ReverseMap();
-        CreateMap<VmEmployee, Model.Employee>().ReverseMap();
-
-
+        CreateMap<Model.Employee, VmEmployee>()
+            .ForMember(x=>x.Picture, x=>x.MapFrom(src=>string.IsNullOrEmpty(src.Picture)?"":$"{"images/profiles"}/{src.Picture}"))
+            .ReverseMap();
     }
 }

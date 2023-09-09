@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EmploymentProjectTeam02.Infrustructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AllTable : Migration
+    public partial class CreateAllTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,7 +69,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,7 +107,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    Joiningdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    JoiningDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SSc = table.Column<bool>(type: "bit", nullable: false),
                     HSc = table.Column<bool>(type: "bit", nullable: false),
                     BSc = table.Column<bool>(type: "bit", nullable: false),

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace EmploymentProjectTeam02.Models
@@ -11,12 +13,11 @@ namespace EmploymentProjectTeam02.Models
         public string Gender { get; set; }
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-        public DateTime Joiningdate { get; set; }
+        public DateTime JoiningDate { get; set; }
         public Boolean Ssc { get; set; }
         public Boolean Hsc { get; set; }
         public Boolean Bsc { get; set; }
         public Boolean Msc { get; set; }
-        [JsonIgnore]
         public string Picture { get; set; }
         public int CountryId { get; set; }
         public Country Country { get; set; }
@@ -24,7 +25,7 @@ namespace EmploymentProjectTeam02.Models
         public State State { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
-
+      
         public IFormFile PictureFile { get; set; }  
     }
 }

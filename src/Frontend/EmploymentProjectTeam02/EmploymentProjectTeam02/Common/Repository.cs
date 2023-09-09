@@ -12,42 +12,23 @@ public class Repository<TEntity>  : IRepository<TEntity> where TEntity : class
         _httpClient = httpClientFactory.CreateClient("EmployeeApi");
         _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
     }
-
     public async Task<TEntity> GetById(int id)
     {
         var response = await _httpClient.GetAsync($"{_endpoint}/{id}");
         return await response.Content.ReadFromJsonAsync<TEntity>();
     }
-
     public async Task<IEnumerable<TEntity>> GetAll()
     {
         var response = await _httpClient.GetAsync(_endpoint);
         return await response.Content.ReadFromJsonAsync<IEnumerable<TEntity>>();
     }
-
-    public async Task Insert(TEntity entity)
-    {
+    public async Task Insert(TEntity entity)=> await _httpClient.PostAsJsonAsync(_endpoint, entity);
+    public async Task Update(int id, TEntity entity)=> await _httpClient.PutAsJsonAsync($"{_endpoint}/{id}", entity);
        
-        await _httpClient.PostAsJsonAsync(_endpoint, entity);
-        
-    }
-
-    public async Task Update(int id, TEntity entity)
-    {
-        var response = await _httpClient.PutAsJsonAsync($"{_endpoint}/{id}", entity);
-        response.EnsureSuccessStatusCode();
-    }
-
     public async Task<TEntity> Delete(int id)
     {
         var response = await _httpClient.DeleteAsync($"{_endpoint}/{id}");
-        if (response.IsSuccessStatusCode)
-        {
-            return await response.Content.ReadFromJsonAsync<TEntity>();
-        }
-        else
-        {
-            throw new Exception($"Failed to delete entity with ID {id}. Status code: {response.StatusCode}");
-        }
+        if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<TEntity>();
+        else throw new Exception($"Failed to delete entity with ID {id}. Status code: {response.StatusCode}");
     }
 }

@@ -9,13 +9,7 @@ public record DeleteCountry(int id):IRequest<VmCountry>;
 public class DeleteCountryHandler:IRequestHandler<DeleteCountry, VmCountry>
 {
     private readonly ICountryRepository _countryRepository;
-    public DeleteCountryHandler(ICountryRepository countryRepository)
-    {
-        _countryRepository = countryRepository;
-    }
-
-    public async Task<VmCountry> Handle(DeleteCountry request, CancellationToken cancellationToken)
-    {
-        return await _countryRepository.Delete(request.id);
-    }
+    public DeleteCountryHandler(ICountryRepository countryRepository)=>_countryRepository = countryRepository;
+    public async Task<VmCountry> Handle(DeleteCountry request, CancellationToken cancellationToken)=> await _countryRepository.Delete(request.id);
+    
 }

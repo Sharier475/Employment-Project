@@ -25,6 +25,7 @@ public class StateRepository : Repository<State>, IStateRepository
             {
                 Value = state.Id.ToString(),Text = state.StateName
             }).ToList();
+
             return selectListItems;
         }
     }

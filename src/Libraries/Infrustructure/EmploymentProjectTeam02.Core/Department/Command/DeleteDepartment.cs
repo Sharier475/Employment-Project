@@ -13,8 +13,8 @@ namespace EmploymentProjectTeam02.Core.Department.Command
     public class DeleteDepartmentHandler :
     IRequestHandler<DeleteDepartment, VmDepartment>
     {
-        private readonly IDepartmentRepositpry _departmentRepositpry;
-        public DeleteDepartmentHandler(IDepartmentRepositpry departmentRepositpry)
+        private readonly IDepartmentRepository _departmentRepositpry;
+        public DeleteDepartmentHandler(IDepartmentRepository departmentRepositpry)
         {
             _departmentRepositpry = departmentRepositpry;
         }

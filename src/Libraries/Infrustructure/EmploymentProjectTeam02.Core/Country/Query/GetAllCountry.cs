@@ -9,15 +9,8 @@ public record GetAllCountry():IRequest<IEnumerable<VmCountry>>;
 public class GetAllCountryHandler : IRequestHandler<GetAllCountry, IEnumerable<VmCountry>>
 {
     private readonly ICountryRepository _countryRepository;
-    public GetAllCountryHandler(ICountryRepository countryRepository)
-    {
-        _countryRepository = countryRepository;
-    }
-
-    public async Task<IEnumerable<VmCountry>> Handle(GetAllCountry request, CancellationToken cancellationToken)
-    {
-        var result = await _countryRepository.GetList();
-        return result;
-    }
+    public GetAllCountryHandler(ICountryRepository countryRepository)=> _countryRepository = countryRepository;
+    public async Task<IEnumerable<VmCountry>> Handle(GetAllCountry request, CancellationToken cancellationToken)=> await _countryRepository.GetList();
+    
 }
 

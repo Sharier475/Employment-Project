@@ -159,7 +159,7 @@ namespace EmploymentProjectTeam02.Infrustructure.Migrations
                     b.Property<bool>("HSc")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("Joiningdate")
+                    b.Property<DateTime>("JoiningDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTimeOffset?>("LastModified")

@@ -9,7 +9,7 @@ using Taskmanagement.Shared.CommonRepository;
 
 namespace EmploymentProjectTeam02.Repositories.Interface
 {
-    public interface IDepartmentRepositpry:IRepository<Department, VmDepartment, int>
+    public interface IDepartmentRepository:IRepository<Department, VmDepartment, int>
     {
     }
 }

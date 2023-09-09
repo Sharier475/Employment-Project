@@ -14,8 +14,8 @@ namespace EmploymentProjectTeam02.Core.Department.Query
     public class GetDepartmentByIdHandler : IRequestHandler<GetDepartmentById, VmDepartment>
 
     {
-        private readonly IDepartmentRepositpry _departmentRepositpry;
-            public GetDepartmentByIdHandler(IDepartmentRepositpry departmentrepositpry)
+        private readonly IDepartmentRepository _departmentRepositpry;
+            public GetDepartmentByIdHandler(IDepartmentRepository departmentrepositpry)
         {
             _departmentRepositpry = departmentrepositpry;
         }
