@@ -1,28 +1,15 @@
 ﻿using EmploymentProjectTeam02.Repositories.Interface;
 using EmploymentProjectTeam02.Services.Model;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
+namespace EmploymentProjectTeam02.Core.Department.Query;
 
-namespace EmploymentProjectTeam02.Core.Department.Query
+public record GetDepartmentById(int Id): IRequest<VmDepartment>;
+public class GetDepartmentByIdHandler : IRequestHandler<GetDepartmentById, VmDepartment>
+
 {
-    public record GetDepartmentById(int Id): IRequest<VmDepartment>;
-    public class GetDepartmentByIdHandler : IRequestHandler<GetDepartmentById, VmDepartment>
-
-    {
-        private readonly IDepartmentRepository _departmentRepositpry;
-            public GetDepartmentByIdHandler(IDepartmentRepository departmentrepositpry)
-        {
-            _departmentRepositpry = departmentrepositpry;
-        }
-
-        public async Task<VmDepartment> Handle(GetDepartmentById request, CancellationToken cancellationToken)
-        {
-            return await _departmentRepositpry.GetById(request.Id);
-        }
-    }
+    private readonly IDepartmentRepository _departmentRepository;
+    public GetDepartmentByIdHandler(IDepartmentRepository departmentRepository)=>_departmentRepository = departmentRepository;
+    public async Task<VmDepartment> Handle(GetDepartmentById request, CancellationToken cancellationToken)=> await _departmentRepository.GetById(request.Id);
+    
 }

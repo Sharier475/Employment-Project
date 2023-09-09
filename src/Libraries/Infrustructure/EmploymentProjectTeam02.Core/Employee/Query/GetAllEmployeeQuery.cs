@@ -11,13 +11,8 @@ public record GetAllEmployeeQuery() : IRequest<IEnumerable<VmEmployee>>;
 public class GetAllEmployeeQueryHandler : IRequestHandler<GetAllEmployeeQuery, IEnumerable<VmEmployee>>
 {
     private readonly IEmployeeRepository _EmployeeRepository;
-    public GetAllEmployeeQueryHandler(IEmployeeRepository EmployeeRepository, IMapper mapper)
-    {
-        _EmployeeRepository = EmployeeRepository;
-    }
-    public async Task<IEnumerable<VmEmployee>> Handle(GetAllEmployeeQuery request, CancellationToken cancellationToken)
-    {
-        var result = await _EmployeeRepository.GetList(x=>x.Country,x=>x.State,x=>x.City,x=>x.Department);
-        return result;
-    }
+    public GetAllEmployeeQueryHandler(IEmployeeRepository EmployeeRepository, IMapper mapper)=>_EmployeeRepository = EmployeeRepository;
+    
+    public async Task<IEnumerable<VmEmployee>> Handle(GetAllEmployeeQuery request, CancellationToken cancellationToken)=> await _EmployeeRepository.GetList(x => x.Country, x => x.State, x => x.City, x => x.Department);
+    
 }
