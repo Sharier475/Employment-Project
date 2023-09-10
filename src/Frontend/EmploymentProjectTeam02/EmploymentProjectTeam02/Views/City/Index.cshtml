@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EmploymentProjectTeam02.Models.City>;
+@{
+    ViewData["Title"] = "Index";
+    int idno = 1;
+}
+
+<div class="container border mt-5 p-3">
+    <p class="text-center">
+        <a class="btn btn-primary" asp-action="AddorEdit"><i class="fa-solid fa-plus"></i> Create New</a>
+    </p>
+    <table id="cityTable" class="table table-bordered  table-striped table-responsive" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>State Name</th>
+                <th>
+                    City Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @idno
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State.StateName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CityName)
+                        </td>
+                        <td class="text-end">
+
+                            <a class=" btn btn-success" href="City/AddorEdit/@item.Id"><i class="fa-solid fa-pen-to-square"></i> Edit</a> |
+
+                            <a class="delete-button btn btn-danger" href="City/Delete/@item.Id" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fa-solid fa-trash"></i> Delete</a>
+
+                        </td>
+                    </tr>
+
+                    idno += 1;
+
+
+
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

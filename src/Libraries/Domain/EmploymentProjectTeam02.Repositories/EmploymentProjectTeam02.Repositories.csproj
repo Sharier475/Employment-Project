@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrustructure\EmploymentProjectTeam02.Infrustructure\EmploymentProjectTeam02.Infrustructure.csproj" />
+    <ProjectReference Include="..\..\Infrustructure\EmploymentProjectTeam02.Services.Model\EmploymentProjectTeam02.Services.Model.csproj" />
+    <ProjectReference Include="..\EmploymentProjectTeam02.Model\EmploymentProjectTeam02.Model.csproj" />
+    <ProjectReference Include="..\EmploymentProjectTeam02.Shared\EmploymentProjectTeam02.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+﻿using EmploymentProjectTeam02.Shared.Common;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace EmploymentProjectTeam02.Services.Model;
+
+public class VmEmployee:IVm
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Address { get; set; }
+    public string Gender { get; set; }
+    public int DepartmentId { get; set; }
+    public VmDepartment    Department { get; set; }
+    public DateTime Joiningdate { get; set; }
+    public Boolean SSc { get; set; }
+    public Boolean HSc { get; set; }
+    public Boolean BSc { get; set; }
+    public Boolean MSc { get; set; }
+    public string Picture { get; set; }
+    public int CountryId { get; set; }
+    public VmCountry Country { get; set; }
+    public int StateId { get; set; }
+    public VmState State { get; set; }
+    public int CityId { get; set; }
+    public VmCity City { get; set; }
+    public IFormFile PictureFile { get; set; }
+}

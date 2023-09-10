@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\EmploymentProjectTeam02.Model\EmploymentProjectTeam02.Model.csproj" />
+    <ProjectReference Include="..\..\Domain\EmploymentProjectTeam02.Repositories\EmploymentProjectTeam02.Repositories.csproj" />
+    <ProjectReference Include="..\EmploymentProjectTeam02.Infrustructure\EmploymentProjectTeam02.Infrustructure.csproj" />
+    <ProjectReference Include="..\EmploymentProjectTeam02.Services.Model\EmploymentProjectTeam02.Services.Model.csproj" />
+  </ItemGroup>
+
+</Project>
